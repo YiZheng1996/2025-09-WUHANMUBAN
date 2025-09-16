@@ -1,4 +1,4 @@
-﻿namespace MainUI.Procedure.DSL
+﻿namespace MainUI.Procedure
 {
     public partial class ucItemConfiguration : ucBaseManagerUI
     {

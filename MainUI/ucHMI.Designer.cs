@@ -172,9 +172,7 @@ namespace MainUI
             LabAI01 = new UILabel();
             tabPage1 = new AntdUI.TabPage();
             uiPanel6 = new UIPanel();
-            minus = new PictureBox();
-            LabelNumber = new UIDigitalLabel();
-            plus = new PictureBox();
+            inputNumber = new InputNumber();
             btnPageDown = new UISymbolButton();
             btnPageUp = new UISymbolButton();
             btnPrintReport = new UISymbolButton();
@@ -215,8 +213,6 @@ namespace MainUI
             uiPanel1.SuspendLayout();
             tabPage1.SuspendLayout();
             uiPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)minus).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)plus).BeginInit();
             uiTitlePanel4.SuspendLayout();
             panelHand.SuspendLayout();
             SuspendLayout();
@@ -259,7 +255,6 @@ namespace MainUI
             TableItemPoint.Size = new Size(320, 431);
             TableItemPoint.TabIndex = 53;
             TableItemPoint.CheckedChanged += TableItemPoint_CheckedChanged;
-            TableItemPoint.SetRowStyle += TableItemPoint_SetRowStyle;
             // 
             // btnProductSelection
             // 
@@ -694,7 +689,6 @@ namespace MainUI
             tabs1.Pages.Add(tabPage3);
             tabs1.Pages.Add(tabPage1);
             tabs1.ScrollForeHover = SystemColors.ActiveBorder;
-            tabs1.SelectedIndex = 1;
             tabs1.Size = new Size(1425, 910);
             tabs1.Style = styleLine1;
             tabs1.TabIndex = 405;
@@ -704,7 +698,7 @@ namespace MainUI
             // 
             tabPage3.BackColor = Color.FromArgb(42, 47, 55);
             tabPage3.Controls.Add(grpRainy);
-            tabPage3.Location = new Point(-1419, -904);
+            tabPage3.Location = new Point(3, 3);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(1419, 904);
             tabPage3.TabIndex = 0;
@@ -2586,7 +2580,7 @@ namespace MainUI
             // 
             tabPage1.Controls.Add(uiPanel6);
             tabPage1.Controls.Add(panelReport);
-            tabPage1.Location = new Point(3, 3);
+            tabPage1.Location = new Point(-1419, -904);
             tabPage1.Name = "tabPage1";
             tabPage1.Size = new Size(1419, 904);
             tabPage1.TabIndex = 1;
@@ -2595,9 +2589,7 @@ namespace MainUI
             // uiPanel6
             // 
             uiPanel6.BackColor = Color.Transparent;
-            uiPanel6.Controls.Add(minus);
-            uiPanel6.Controls.Add(LabelNumber);
-            uiPanel6.Controls.Add(plus);
+            uiPanel6.Controls.Add(inputNumber);
             uiPanel6.Controls.Add(btnPageDown);
             uiPanel6.Controls.Add(btnPageUp);
             uiPanel6.Controls.Add(btnPrintReport);
@@ -2618,47 +2610,25 @@ namespace MainUI
             uiPanel6.Text = null;
             uiPanel6.TextAlignment = ContentAlignment.MiddleCenter;
             // 
-            // minus
+            // inputNumber
             // 
-            minus.BackColor = Color.White;
-            minus.Image = (Image)resources.GetObject("minus.Image");
-            minus.Location = new Point(160, 188);
-            minus.Name = "minus";
-            minus.Size = new Size(32, 32);
-            minus.TabIndex = 493;
-            minus.TabStop = false;
-            // 
-            // LabelNumber
-            // 
-            LabelNumber.BackColor = Color.FromArgb(218, 220, 230);
-            LabelNumber.DecimalPlaces = 0;
-            LabelNumber.DigitalSize = 23;
-            LabelNumber.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            LabelNumber.ForeColor = Color.FromArgb(46, 46, 46);
-            LabelNumber.Location = new Point(55, 187);
-            LabelNumber.MinimumSize = new Size(1, 1);
-            LabelNumber.Name = "LabelNumber";
-            LabelNumber.Size = new Size(98, 33);
-            LabelNumber.TabIndex = 492;
-            LabelNumber.TextAlign = HorizontalAlignment.Center;
-            LabelNumber.Value = 5D;
-            // 
-            // plus
-            // 
-            plus.BackColor = Color.White;
-            plus.Image = (Image)resources.GetObject("plus.Image");
-            plus.Location = new Point(17, 188);
-            plus.Name = "plus";
-            plus.Size = new Size(32, 32);
-            plus.TabIndex = 491;
-            plus.TabStop = false;
+            inputNumber.BackColor = Color.FromArgb(218, 220, 230);
+            inputNumber.Font = new Font("微软雅黑", 14F, FontStyle.Bold);
+            inputNumber.Location = new Point(17, 181);
+            inputNumber.Name = "inputNumber";
+            inputNumber.SelectionStart = 1;
+            inputNumber.Size = new Size(175, 44);
+            inputNumber.TabIndex = 494;
+            inputNumber.Text = "5";
+            inputNumber.TextAlign = HorizontalAlignment.Center;
+            inputNumber.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // btnPageDown
             // 
             btnPageDown.FillDisableColor = Color.FromArgb(80, 160, 255);
             btnPageDown.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
             btnPageDown.ForeDisableColor = Color.White;
-            btnPageDown.Location = new Point(17, 227);
+            btnPageDown.Location = new Point(17, 226);
             btnPageDown.MinimumSize = new Size(1, 1);
             btnPageDown.Name = "btnPageDown";
             btnPageDown.RectDisableColor = Color.FromArgb(80, 160, 255);
@@ -2667,7 +2637,7 @@ namespace MainUI
             btnPageDown.TabIndex = 490;
             btnPageDown.Text = "下翻";
             btnPageDown.TipsFont = new Font("宋体", 11F);
-            btnPageDown.Click += btnPageDown_Click;
+            btnPageDown.Click += BtnPageDown_Click;
             // 
             // btnPageUp
             // 
@@ -2683,7 +2653,7 @@ namespace MainUI
             btnPageUp.TabIndex = 489;
             btnPageUp.Text = "上翻";
             btnPageUp.TipsFont = new Font("宋体", 11F);
-            btnPageUp.Click += btnPageUp_Click;
+            btnPageUp.Click += BtnPageUp_Click;
             // 
             // btnPrintReport
             // 
@@ -2700,6 +2670,7 @@ namespace MainUI
             btnPrintReport.TabIndex = 488;
             btnPrintReport.Text = "打印报表";
             btnPrintReport.TipsFont = new Font("宋体", 11F);
+            btnPrintReport.Click += btnPrintReport_Click;
             // 
             // btnSaveReport
             // 
@@ -2721,6 +2692,7 @@ namespace MainUI
             // panelReport
             // 
             panelReport.BackColor = Color.FromArgb(236, 236, 236);
+            panelReport.Dock = DockStyle.Left;
             panelReport.FillColor = Color.FromArgb(236, 236, 236);
             panelReport.FillColor2 = Color.FromArgb(236, 236, 236);
             panelReport.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
@@ -2730,7 +2702,7 @@ namespace MainUI
             panelReport.Name = "panelReport";
             panelReport.Padding = new Padding(1);
             panelReport.Radius = 0;
-            panelReport.RectColor = Color.Black;
+            panelReport.RectColor = Color.Transparent;
             panelReport.RectDisableColor = Color.FromArgb(236, 236, 236);
             panelReport.Size = new Size(1204, 904);
             panelReport.TabIndex = 399;
@@ -2744,7 +2716,7 @@ namespace MainUI
             btnWorkmanshipForms.BorderWidth = 1F;
             btnWorkmanshipForms.Font = new Font("微软雅黑", 14F, FontStyle.Bold);
             btnWorkmanshipForms.ForeColor = Color.Black;
-            btnWorkmanshipForms.JoinMode = TJoinMode.Right;
+            btnWorkmanshipForms.JoinMode = TJoinMode.Left;
             btnWorkmanshipForms.Location = new Point(335, 0);
             btnWorkmanshipForms.Name = "btnWorkmanshipForms";
             btnWorkmanshipForms.Size = new Size(158, 35);
@@ -2985,8 +2957,6 @@ namespace MainUI
             uiPanel1.PerformLayout();
             tabPage1.ResumeLayout(false);
             uiPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)minus).EndInit();
-            ((System.ComponentModel.ISupportInitialize)plus).EndInit();
             uiTitlePanel4.ResumeLayout(false);
             panelHand.ResumeLayout(false);
             ResumeLayout(false);
@@ -3029,9 +2999,6 @@ namespace MainUI
         private UIPanel grpDO;
         private UIPanel LabTestTime;
         private UIPanel uiPanel6;
-        private PictureBox minus;
-        private UIDigitalLabel LabelNumber;
-        private PictureBox plus;
         private UISymbolButton btnPageDown;
         private UISymbolButton btnPageUp;
         private UISymbolButton btnPrintReport;
@@ -3149,5 +3116,6 @@ namespace MainUI
         private UIButton btnGasPath;
         private UITextBox txtNumber;
         private UILabel uiLabel7;
+        private InputNumber inputNumber;
     }
 }

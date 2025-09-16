@@ -1,6 +1,6 @@
 ﻿using AntdUI;
 
-namespace MainUI.Procedure.DSL
+namespace MainUI.Procedure
 {
     public partial class ucItemManagerial : ucBaseManagerUI
     {
@@ -15,11 +15,7 @@ namespace MainUI.Procedure.DSL
             TableTestProcess.Columns = [
                 new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
                 new Column("ProcessName","项点名称"){ Align = ColumnAlign.Center, Width="390"},
-                new ColumnSwitch("Enable","启用",ColumnAlign.Center){ Call = (value , record , i_row , i_col)=>
-                {
-                    Thread.Sleep(100);
-                    return value;
-                 }},
+                new ColumnSwitch("Enable","启用",ColumnAlign.Center).SetAutoCheck(false),
             ];
             var data = ProcessBll.GetTestProcess();
             RowCount = data.Count;
@@ -85,6 +81,11 @@ namespace MainUI.Procedure.DSL
             {
                 _processModel = model;
             }
+        }
+
+        private void TableTestProcess_CellDoubleClick(object sender, TableClickEventArgs e)
+        {
+            LoadData(_processModel);
         }
     }
 }

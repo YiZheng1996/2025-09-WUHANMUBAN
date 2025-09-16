@@ -1,6 +1,6 @@
 ﻿using Padding = System.Windows.Forms.Padding;
 
-namespace MainUI.Procedure.DSL
+namespace MainUI.Procedure
 {
     partial class ucItemManagerial
     {
@@ -89,6 +89,7 @@ namespace MainUI.Procedure.DSL
             TableTestProcess.SwitchSize = 25;
             TableTestProcess.TabIndex = 407;
             TableTestProcess.CellClick += TableTestProcess_CellClick;
+            TableTestProcess.CellDoubleClick += TableTestProcess_CellDoubleClick;
             // 
             // btnEdit
             // 

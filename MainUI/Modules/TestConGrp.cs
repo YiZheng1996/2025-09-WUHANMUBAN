@@ -32,8 +32,16 @@ namespace MainUI.Modules
             }
             set
             {
-                string tag = index.ToString().PadLeft(3, '0');
-                Write("TestCon.Test" + tag, value);
+                try
+                {
+                    string tag = index.ToString().PadLeft(3, '0');
+                    Write("TestCon.Test" + tag, value);
+                }
+                catch (Exception ex)
+                {
+                    NlogHelper.Default.Error($"写入 TestCon[{index}] = {value} 失败", ex);
+                    // 不抛出异常，避免程序崩溃
+                }
             }
         }
         public void Fresh()

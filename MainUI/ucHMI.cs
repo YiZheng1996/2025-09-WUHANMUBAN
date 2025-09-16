@@ -1,5 +1,7 @@
 ﻿using AntdUI;
 using MainUI.Service;
+using RW.UI.Controls.Report;
+using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
 
 namespace MainUI
@@ -9,10 +11,11 @@ namespace MainUI
         #region 全局变量
         private readonly RW.Report rWReport = new();
         private readonly frmMainMenu frm = new();
+        Dictionary<TaskInfo, BaseTest> DicTestItems = [];
         public delegate void RunStatusHandler(bool obj);
         public event RunStatusHandler EmergencyStatusChanged;
         private static ParaConfig paraconfig;
-        private readonly List<ItemPointModel> _itemPoints = [];
+        private List<ItemPointModel> _itemPoints = [];
         private readonly ControlMappings controls = new();
         private readonly ControlInitializationService _controlInitService;
         public delegate void TestStateHandler(bool isTesting);
@@ -33,7 +36,7 @@ namespace MainUI
             InitializeComponent();
             _opcEventRegistration = new OPCEventRegistration(this);
             reportPath = Path.Combine(Application.StartupPath, Constants.ReportsPath);
-            _reportService = new ReportService(reportPath);
+            _reportService = new ReportService(reportPath, rWReport);
             _tableService = new TableService(TableItemPoint, _itemPoints);
             _countdownService = new CountdownService(LabTestTime);
             _controlInitService = new ControlInitializationService(controls);
@@ -85,12 +88,7 @@ namespace MainUI
         private void InitializeControls()
         {
             _controlInitService.InitializeAllControls(this);
-            _tableService.InitColumns();
-        }
-
-        private Table.CellStyleInfo TableItemPoint_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
-        {
-            return _tableService.SetRowStyle(e.Record);
+            _tableService.InittializeColumns(); // 初始化表格列
         }
 
         private void TableItemPoint_CheckedChanged(object sender, TableCheckEventArgs e)
@@ -155,33 +153,54 @@ namespace MainUI
             Refresh(); // 触发UI更新
         }
 
-        private void InitializeReport(string Path)
+        /// <summary>
+        /// 初始化报表
+        /// </summary>
+        /// <param name="reportFileName">报表文件名</param>
+        private void InitializeReport(string reportFileName)
         {
             try
             {
-                string filePath = Application.StartupPath + "reports\\" + Path;
-                string path2 = Application.StartupPath + "reports\\report.xlsx";
+                if (string.IsNullOrEmpty(reportFileName))
+                    return;
 
-                if (rWReport.Filename != filePath)
+                reportFileName = ReportService.GetDefaultReportPath() + reportFileName;
+
+                // 检查文件是否存在
+                if (!_reportService.FileExists(reportFileName))
                 {
+                    MessageHelper.MessageOK($"报表文件不存在：{reportFileName}", TType.Error);
+                    return;
+                }
+
+                string workingPath = ReportService.GetWorkingReportPath();
+
+                // 如果当前加载的不是这个文件，则重新加载
+                //if (rWReport.Filename != workingPath)
+                {
+                    // 准备报表控件
                     rWReport.Dock = DockStyle.Fill;
                     if (!panelReport.Controls.Contains(rWReport))
                         panelReport.Controls.Add(rWReport);
 
-                    SystemHelper.KillProcess("EXCEL");
+                    // 关闭Excel进程
+                    ProcessHelper.KillProcess("EXCEL");
                     Thread.Sleep(200);
-                    File.Copy(filePath, path2, true);
-                    rWReport.Filename = path2;
-                    rWReport.Init();  //办公室暂时注释
+
+                    // 复制文件到工作目录
+                    _reportService.CopyReportFile(reportFileName, workingPath);
+
+                    // 初始化报表控件
+                    rWReport.Filename = workingPath;
+                    rWReport.Init();
                 }
             }
             catch (Exception ex)
             {
                 NlogHelper.Default.Error("报表加载错误：", ex);
+                MessageHelper.MessageOK($"报表加载错误：{ex.Message}", TType.Error);
             }
         }
-
-
         #endregion
 
         #region 值改变事件
@@ -255,11 +274,8 @@ namespace MainUI
                 // 初始化测试项
                 _tableService.LoadTestItems();
 
-                // 处理报表文件
-                if (!string.IsNullOrEmpty(paraconfig.RptFile))
-                {
-                    InitializeReport(paraconfig.RptFile);
-                }
+                // 初始化报表
+                InitializeReport(paraconfig.RptFile);
             }
             catch (Exception ex)
             {
@@ -304,14 +320,20 @@ namespace MainUI
                 // 3. 初始化取消计时器令牌
                 _cancellationTokenSource = new CancellationTokenSource();
 
-                // 4. 并行执行倒计时和测试
-                var countdownTask = _countdownService.StartCountdown(
-                    paraconfig.SprayTime.ToInt(),
-                    _cancellationTokenSource.Token
-                );
+                // 4. 开始测试
+                await Task.Factory.StartNew(() => BackgroundWorker(_cancellationTokenSource),
+                   _cancellationTokenSource.Token,
+                   TaskCreationOptions.LongRunning,
+                   TaskScheduler.Default);
 
-                // 5. 等待所有任务完成
-                await Task.WhenAll(countdownTask);
+                //// 4. 并行执行倒计时和测试
+                //var countdownTask = _countdownService.StartCountdown(
+                //    paraconfig.SprayTime.ToInt(),
+                //    _cancellationTokenSource.Token
+                //);
+
+                //// 5. 等待所有任务完成
+                //await countdownTask;
             }
             catch (TaskCanceledException ex)
             {
@@ -327,12 +349,72 @@ namespace MainUI
             }
         }
 
+        // 试验项点启动
+        private async Task BackgroundWorker(CancellationTokenSource source)
+        {
+            _itemPoints.ForEach(i => { i.ColorState = 0; });
+            // 初始化所有项点类
+            DicTestItems = new Dictionary<TaskInfo, BaseTest>
+            {
+                { new TaskInfo { TaskName = "试验测试1",
+                    CancellationTokenSource = new CancellationTokenSource() },
+                    new AirTightnessTest() },
+
+                { new TaskInfo { TaskName = "试验测试2",
+                    CancellationTokenSource = new CancellationTokenSource() },
+                    new StaticWaterTightnessTest() },
+
+                { new TaskInfo { TaskName = "试验测试3",
+                    CancellationTokenSource = new CancellationTokenSource() },
+                    new DynamicWaterTightnessTest() }
+            };
+
+            // 根据Key找到对应的测试项
+            foreach (var item in _itemPoints.Where(p => p.Check))
+            {
+                var taskInfo = DicTestItems.Keys.FirstOrDefault(t => t.TaskName == item.ItemName);
+                if (taskInfo != null && DicTestItems.TryGetValue(taskInfo, out var test))
+                {
+                    TableColor(item, 1);
+                    await test.Execute(taskInfo.CancellationTokenSource.Token);
+                    TableColor(item, 2);
+                }
+            }
+            IsTestEnd();
+        }
+
         // 设置行颜色
         private void TableColor(ItemPointModel itemPoint, int state)
         {
             itemPoint.ColorState = state;
             TableItemPoint.Invalidate();
         }
+
+        // 取消DicTestItems中所有测试任务
+        private void CancelAllTestTasksAsync()
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    foreach (var item in DicTestItems)
+                    {
+                        item.Key.CancellationTokenSource.Cancel();
+                        item.Key.CancellationTokenSource.Dispose();
+                        Debug.WriteLine($"Task {item.Key.TaskName} 已停止并释放资源（立即取消）");
+                    }
+                    OPCHelper.TestCongrp[41] = true;
+                    Task.Delay(1000).Wait(); // 等待1秒钟，确保状态更新
+                    OPCHelper.TestCongrp[41] = false;
+                });
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"Task释放资源错误：{ex}");
+                MessageHelper.MessageOK($"Task释放资源错误：{ex.Message}");
+            }
+        }
+
 
         private void btnStopTest_Click(object sender, EventArgs e) => IsTestEnd();
 
@@ -350,10 +432,10 @@ namespace MainUI
             {
                 return (false, "请注意，手动情况下无法启动自动试验!");
             }
-            if (string.IsNullOrEmpty(paraconfig.SprayTime) || string.IsNullOrEmpty(paraconfig.ApplyPressure))
-            {
-                return (false, "请注意，该型号试验参数未设置，无法启动自动试验!");
-            }
+            //if (string.IsNullOrEmpty(paraconfig.SprayTime) || string.IsNullOrEmpty(paraconfig.ApplyPressure))
+            //{
+            //    return (false, "请注意，该型号试验参数未设置，无法启动自动试验!");
+            //}
             return (true, "");
         }
 
@@ -365,7 +447,7 @@ namespace MainUI
                 Disable(false);
                 AppendText("试验结束");
                 TestStateChanged?.Invoke(false);
-
+                CancelAllTestTasksAsync();
                 _countdownService.StopCountdown();
                 _cancellationTokenSource.Cancel();
             }
@@ -405,56 +487,6 @@ namespace MainUI
         }
         #endregion
 
-        #region 报表翻页控制
-        private const int DefaultPageSize = 29; // 默认每页显示行数
-        private int currentRowIndex = 0; // 当前行索引
-        private bool isScrollingDown = false; // 是否向下滚动标记
-
-        /// <summary>
-        /// 向上翻页
-        /// </summary>
-        private void btnPageUp_Click(object sender, EventArgs e)
-        {
-            int pageSize = LabelNumber.Value.ToInt32();
-
-            // 如果之前是向下滚动,需要先回到起始位置
-            if (isScrollingDown)
-            {
-                currentRowIndex -= DefaultPageSize;
-                isScrollingDown = false;
-            }
-
-            // 向上翻页,减少行索引
-            currentRowIndex = Math.Max(0, currentRowIndex - pageSize);
-
-            // 执行翻页
-            //ucGrid1.PageTurning(currentRowIndex);
-        }
-
-        /// <summary>
-        /// 向下翻页
-        /// </summary>
-        private void btnPageDown_Click(object sender, EventArgs e)
-        {
-            int pageSize = LabelNumber.Value.ToInt32();
-
-            // 如果是首次向下滚动,需要先移动到默认页大小位置
-            if (!isScrollingDown)
-            {
-                currentRowIndex = DefaultPageSize;
-                isScrollingDown = true;
-            }
-            else
-            {
-                // 继续向下翻页,增加行索引
-                currentRowIndex += pageSize;
-            }
-
-            // 执行翻页
-            //ucGrid1.PageTurning(currentRowIndex);
-        }
-        #endregion
-
         #region 报表控件
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -466,12 +498,26 @@ namespace MainUI
 
                 string saveFilePath = ReportService.BuildSaveFilePath(VarHelper.TestViewModel.ModelName); // 保存路径
 
-                ReportService.SaveTestRecord(new TestRecordModel
+                // 保存测试记录
+                var testRecord = new TestRecordModel
                 {
-                    //TODO: 填充试验记录数据
-                }); // 保存记录
+                    KindID = VarHelper.TestViewModel.ModelTypeID,
+                    ModelID = VarHelper.TestViewModel.ID,
+                    TestID = txtNumber.Text.Trim(),
+                    Tester = NewUsers.NewUserInfo.Username,
+                    TestTime = DateTime.Now,
+                    ReportPath = saveFilePath
+                };
 
-                MessageHelper.MessageOK("保存成功", TType.Success);
+                if (ReportService.SaveTestRecord(testRecord))
+                {
+                    rWReport.SaveAS(saveFilePath);
+                    MessageHelper.MessageOK("保存成功", TType.Success);
+                }
+                else
+                {
+                    MessageHelper.MessageOK("保存失败", TType.Error);
+                }
             }
             catch (Exception ex)
             {
@@ -480,7 +526,7 @@ namespace MainUI
         }
 
         // 保存试验报告前参数校验
-        private bool ValidateSaveParameters()
+        private static bool ValidateSaveParameters()
         {
             if (string.IsNullOrEmpty(paraconfig?.RptFile))
             {
@@ -498,7 +544,62 @@ namespace MainUI
 
         // 确认保存报表
         private static bool ConfirmSaveReport() =>
-            MessageHelper.MessageYes("是否保存试验结果？") == DialogResult.Yes;
+            MessageHelper.MessageYes("是否保存试验结果？") == DialogResult.OK;
+
+        public int curRows = 1; //当前行数
+        public int MaxcurRows = 1000; //默认最大行数
+        /// <summary>
+        /// 向上翻页
+        /// </summary>
+        private void BtnPageUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int pageSize = Convert.ToInt32(inputNumber.Value);
+                var (currentRows, upEnabled, downEnabled) = _reportService.PageUp(pageSize);
+
+                // 更新按钮状态
+                btnPageUp.Enabled = upEnabled;
+                btnPageDown.Enabled = downEnabled;
+
+                // 显示当前页信息
+                // XX.Text = $"第 {currentRows} 行";
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.MessageOK($"向上翻页失败：{ex.Message}", TType.Error);
+                NlogHelper.Default.Error("报表向上翻页失败", ex);
+            }
+        }
+
+        /// <summary>
+        /// 向下翻页
+        /// </summary>
+        private void BtnPageDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int pageSize = Convert.ToInt32(inputNumber.Value);
+                var (currentRows, upEnabled, downEnabled) = _reportService.PageDown(pageSize);
+
+                // 更新按钮状态
+                btnPageUp.Enabled = upEnabled;
+                btnPageDown.Enabled = downEnabled;
+
+                // 显示当前页信息
+                // XX.Text = $"第 {currentRows} 行";
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.MessageOK($"向下翻页失败：{ex.Message}", TType.Error);
+                NlogHelper.Default.Error("报表向下翻页失败", ex);
+            }
+        }
+
+        private void btnPrintReport_Click(object sender, EventArgs e)
+        {
+            rWReport.Print();
+        }
         #endregion
 
         #region 其他

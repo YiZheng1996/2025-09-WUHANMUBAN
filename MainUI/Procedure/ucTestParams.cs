@@ -1,13 +1,10 @@
 ﻿namespace MainUI.Procedure
 {
-    public partial class ucTestParams : ucBaseManagerUI
+    public partial class UcTestParams : ucBaseManagerUI
     {
         private string ModelName => $"{txtType.Text}_{txtModel.Text}";
         ParaConfig paraconfig = new();
-        public ucTestParams()
-        {
-            InitializeComponent();
-        }
+        public UcTestParams() => InitializeComponent();
 
         /// <summary>
         /// 数据初始化
@@ -20,10 +17,6 @@
                 paraconfig.SetSectionName(ModelName);
                 paraconfig.Load();
                 txtRpt.Text = paraconfig.RptFile;
-                txtSprayTime.Text = paraconfig.SprayTime;
-                txtSprayKpa.Text = paraconfig.SprayKpa;
-                txtApplyPressure.Text = paraconfig.ApplyPressure;
-                txtPressureRelief.Text = paraconfig.PressureRelief;
             }
             catch (Exception ex)
             {
@@ -44,10 +37,6 @@
                 }
                 paraconfig.SetSectionName(ModelName);
                 paraconfig.RptFile = txtRpt.Text;
-                paraconfig.SprayTime = txtSprayTime.Text;
-                paraconfig.SprayKpa = txtSprayKpa.Text;
-                paraconfig.ApplyPressure = txtApplyPressure.Text;
-                paraconfig.PressureRelief = txtPressureRelief.Text;
                 paraconfig.Save();
                 MessageHelper.MessageOK("保存成功。");
             }
@@ -103,5 +92,6 @@
         {
             tabs1.SelectedIndex = 1;
         }
+
     }
 }

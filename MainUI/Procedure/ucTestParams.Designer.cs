@@ -1,6 +1,6 @@
 ﻿namespace MainUI.Procedure
 {
-    partial class ucTestParams
+    partial class UcTestParams
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -41,25 +41,12 @@
             txtRpt = new UITextBox();
             tabs1 = new AntdUI.Tabs();
             tabPage1 = new AntdUI.TabPage();
-            uiLabel10 = new UILabel();
-            txtPressureRelief = new UITextBox();
-            uiLabel11 = new UILabel();
-            uiLabel7 = new UILabel();
-            txtApplyPressure = new UITextBox();
-            uiLabel8 = new UILabel();
-            uiLabel5 = new UILabel();
-            txtSprayKpa = new UITextBox();
-            uiLabel6 = new UILabel();
-            uiLabel4 = new UILabel();
-            txtSprayTime = new UITextBox();
-            uiLabel1 = new UILabel();
             tabPage2 = new AntdUI.TabPage();
             uiLabel3 = new UILabel();
-            btnParameter = new AntdUI.Button();
             btnReport = new AntdUI.Button();
+            btnParameter = new AntdUI.Button();
             uiGroupBox1.SuspendLayout();
             tabs1.SuspendLayout();
-            tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             SuspendLayout();
             // 
@@ -82,10 +69,10 @@
             uiGroupBox1.ForeColor = Color.FromArgb(46, 46, 46);
             uiGroupBox1.ForeDisableColor = Color.FromArgb(235, 227, 221);
             uiGroupBox1.Location = new Point(0, 0);
-            uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            uiGroupBox1.Margin = new Padding(4, 5, 4, 5);
             uiGroupBox1.MinimumSize = new Size(1, 1);
             uiGroupBox1.Name = "uiGroupBox1";
-            uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            uiGroupBox1.Padding = new Padding(0, 32, 0, 0);
             uiGroupBox1.Radius = 15;
             uiGroupBox1.RectColor = Color.White;
             uiGroupBox1.RectDisableColor = Color.White;
@@ -106,10 +93,10 @@
             txtType.ForeDisableColor = Color.FromArgb(235, 227, 221);
             txtType.ForeReadOnlyColor = Color.FromArgb(235, 227, 221);
             txtType.Location = new Point(97, 44);
-            txtType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            txtType.Margin = new Padding(4, 5, 4, 5);
             txtType.MinimumSize = new Size(1, 16);
             txtType.Name = "txtType";
-            txtType.Padding = new System.Windows.Forms.Padding(5);
+            txtType.Padding = new Padding(5);
             txtType.Radius = 10;
             txtType.ReadOnly = true;
             txtType.RectColor = Color.Gray;
@@ -176,10 +163,10 @@
             txtModel.ForeDisableColor = Color.FromArgb(235, 227, 221);
             txtModel.ForeReadOnlyColor = Color.FromArgb(235, 227, 221);
             txtModel.Location = new Point(371, 44);
-            txtModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            txtModel.Margin = new Padding(4, 5, 4, 5);
             txtModel.MinimumSize = new Size(1, 16);
             txtModel.Name = "txtModel";
-            txtModel.Padding = new System.Windows.Forms.Padding(5);
+            txtModel.Padding = new Padding(5);
             txtModel.ReadOnly = true;
             txtModel.RectColor = Color.FromArgb(218, 220, 230);
             txtModel.RectDisableColor = Color.FromArgb(218, 220, 230);
@@ -237,10 +224,10 @@
             txtRpt.ForeDisableColor = Color.FromArgb(235, 227, 221);
             txtRpt.ForeReadOnlyColor = Color.FromArgb(235, 227, 221);
             txtRpt.Location = new Point(165, 126);
-            txtRpt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            txtRpt.Margin = new Padding(4, 5, 4, 5);
             txtRpt.MinimumSize = new Size(1, 16);
             txtRpt.Name = "txtRpt";
-            txtRpt.Padding = new System.Windows.Forms.Padding(5);
+            txtRpt.Padding = new Padding(5);
             txtRpt.ReadOnly = true;
             txtRpt.RectColor = Color.FromArgb(218, 220, 230);
             txtRpt.RectDisableColor = Color.FromArgb(218, 220, 230);
@@ -271,231 +258,11 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.White;
-            tabPage1.Controls.Add(uiLabel10);
-            tabPage1.Controls.Add(txtPressureRelief);
-            tabPage1.Controls.Add(uiLabel11);
-            tabPage1.Controls.Add(uiLabel7);
-            tabPage1.Controls.Add(txtApplyPressure);
-            tabPage1.Controls.Add(uiLabel8);
-            tabPage1.Controls.Add(uiLabel5);
-            tabPage1.Controls.Add(txtSprayKpa);
-            tabPage1.Controls.Add(uiLabel6);
-            tabPage1.Controls.Add(uiLabel4);
-            tabPage1.Controls.Add(txtSprayTime);
-            tabPage1.Controls.Add(uiLabel1);
             tabPage1.Location = new Point(3, 3);
             tabPage1.Name = "tabPage1";
             tabPage1.Size = new Size(659, 464);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "试验参数";
-            // 
-            // uiLabel10
-            // 
-            uiLabel10.AutoSize = true;
-            uiLabel10.BackColor = Color.Transparent;
-            uiLabel10.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel10.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel10.Location = new Point(413, 326);
-            uiLabel10.Name = "uiLabel10";
-            uiLabel10.Size = new Size(35, 26);
-            uiLabel10.TabIndex = 409;
-            uiLabel10.Text = "pa";
-            uiLabel10.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // txtPressureRelief
-            // 
-            txtPressureRelief.FillColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.FillColor2 = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.FillDisableColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.FillReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.Font = new Font("思源黑体 CN Bold", 14F, FontStyle.Bold);
-            txtPressureRelief.ForeColor = Color.FromArgb(46, 46, 46);
-            txtPressureRelief.ForeDisableColor = Color.FromArgb(46, 46, 46);
-            txtPressureRelief.ForeReadOnlyColor = Color.FromArgb(46, 46, 46);
-            txtPressureRelief.Location = new Point(269, 324);
-            txtPressureRelief.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            txtPressureRelief.MinimumSize = new Size(1, 16);
-            txtPressureRelief.Name = "txtPressureRelief";
-            txtPressureRelief.Padding = new System.Windows.Forms.Padding(5);
-            txtPressureRelief.RectColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.RectDisableColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.RectReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtPressureRelief.ShowText = false;
-            txtPressureRelief.Size = new Size(126, 29);
-            txtPressureRelief.TabIndex = 407;
-            txtPressureRelief.Text = "0";
-            txtPressureRelief.TextAlignment = ContentAlignment.MiddleCenter;
-            txtPressureRelief.Type = UITextBox.UIEditType.Integer;
-            txtPressureRelief.Watermark = "请输入";
-            // 
-            // uiLabel11
-            // 
-            uiLabel11.AutoSize = true;
-            uiLabel11.BackColor = Color.Transparent;
-            uiLabel11.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel11.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel11.Location = new Point(142, 324);
-            uiLabel11.Name = "uiLabel11";
-            uiLabel11.Size = new Size(120, 26);
-            uiLabel11.TabIndex = 408;
-            uiLabel11.Text = "泄压压力值：";
-            uiLabel11.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // uiLabel7
-            // 
-            uiLabel7.AutoSize = true;
-            uiLabel7.BackColor = Color.Transparent;
-            uiLabel7.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel7.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel7.Location = new Point(413, 255);
-            uiLabel7.Name = "uiLabel7";
-            uiLabel7.Size = new Size(35, 26);
-            uiLabel7.TabIndex = 406;
-            uiLabel7.Text = "pa";
-            uiLabel7.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // txtApplyPressure
-            // 
-            txtApplyPressure.FillColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.FillColor2 = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.FillDisableColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.FillReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.Font = new Font("思源黑体 CN Bold", 14F, FontStyle.Bold);
-            txtApplyPressure.ForeColor = Color.FromArgb(46, 46, 46);
-            txtApplyPressure.ForeDisableColor = Color.FromArgb(46, 46, 46);
-            txtApplyPressure.ForeReadOnlyColor = Color.FromArgb(46, 46, 46);
-            txtApplyPressure.Location = new Point(269, 253);
-            txtApplyPressure.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            txtApplyPressure.MinimumSize = new Size(1, 16);
-            txtApplyPressure.Name = "txtApplyPressure";
-            txtApplyPressure.Padding = new System.Windows.Forms.Padding(5);
-            txtApplyPressure.RectColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.RectDisableColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.RectReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtApplyPressure.ShowText = false;
-            txtApplyPressure.Size = new Size(126, 29);
-            txtApplyPressure.TabIndex = 404;
-            txtApplyPressure.Text = "0";
-            txtApplyPressure.TextAlignment = ContentAlignment.MiddleCenter;
-            txtApplyPressure.Type = UITextBox.UIEditType.Integer;
-            txtApplyPressure.Watermark = "请输入";
-            // 
-            // uiLabel8
-            // 
-            uiLabel8.AutoSize = true;
-            uiLabel8.BackColor = Color.Transparent;
-            uiLabel8.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel8.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel8.Location = new Point(142, 253);
-            uiLabel8.Name = "uiLabel8";
-            uiLabel8.Size = new Size(120, 26);
-            uiLabel8.TabIndex = 405;
-            uiLabel8.Text = "加压压力值：";
-            uiLabel8.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // uiLabel5
-            // 
-            uiLabel5.AutoSize = true;
-            uiLabel5.BackColor = Color.Transparent;
-            uiLabel5.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel5.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel5.Location = new Point(413, 184);
-            uiLabel5.Name = "uiLabel5";
-            uiLabel5.Size = new Size(35, 26);
-            uiLabel5.TabIndex = 403;
-            uiLabel5.Text = "pa";
-            uiLabel5.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // txtSprayKpa
-            // 
-            txtSprayKpa.FillColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.FillColor2 = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.FillDisableColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.FillReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.Font = new Font("思源黑体 CN Bold", 14F, FontStyle.Bold);
-            txtSprayKpa.ForeColor = Color.FromArgb(46, 46, 46);
-            txtSprayKpa.ForeDisableColor = Color.FromArgb(46, 46, 46);
-            txtSprayKpa.ForeReadOnlyColor = Color.FromArgb(46, 46, 46);
-            txtSprayKpa.Location = new Point(269, 182);
-            txtSprayKpa.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            txtSprayKpa.MinimumSize = new Size(1, 16);
-            txtSprayKpa.Name = "txtSprayKpa";
-            txtSprayKpa.Padding = new System.Windows.Forms.Padding(5);
-            txtSprayKpa.RectColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.RectDisableColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.RectReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtSprayKpa.ShowText = false;
-            txtSprayKpa.Size = new Size(126, 29);
-            txtSprayKpa.TabIndex = 401;
-            txtSprayKpa.Text = "0";
-            txtSprayKpa.TextAlignment = ContentAlignment.MiddleCenter;
-            txtSprayKpa.Type = UITextBox.UIEditType.Integer;
-            txtSprayKpa.Watermark = "请输入";
-            // 
-            // uiLabel6
-            // 
-            uiLabel6.AutoSize = true;
-            uiLabel6.BackColor = Color.Transparent;
-            uiLabel6.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel6.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel6.Location = new Point(160, 182);
-            uiLabel6.Name = "uiLabel6";
-            uiLabel6.Size = new Size(102, 26);
-            uiLabel6.TabIndex = 402;
-            uiLabel6.Text = "喷淋压力：";
-            uiLabel6.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // uiLabel4
-            // 
-            uiLabel4.AutoSize = true;
-            uiLabel4.BackColor = Color.Transparent;
-            uiLabel4.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel4.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel4.Location = new Point(413, 113);
-            uiLabel4.Name = "uiLabel4";
-            uiLabel4.Size = new Size(44, 26);
-            uiLabel4.TabIndex = 400;
-            uiLabel4.Text = "Min";
-            uiLabel4.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // txtSprayTime
-            // 
-            txtSprayTime.FillColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.FillColor2 = Color.FromArgb(218, 220, 230);
-            txtSprayTime.FillDisableColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.FillReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.Font = new Font("思源黑体 CN Bold", 14F, FontStyle.Bold);
-            txtSprayTime.ForeColor = Color.FromArgb(46, 46, 46);
-            txtSprayTime.ForeDisableColor = Color.FromArgb(46, 46, 46);
-            txtSprayTime.ForeReadOnlyColor = Color.FromArgb(46, 46, 46);
-            txtSprayTime.Location = new Point(269, 111);
-            txtSprayTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            txtSprayTime.MinimumSize = new Size(1, 16);
-            txtSprayTime.Name = "txtSprayTime";
-            txtSprayTime.Padding = new System.Windows.Forms.Padding(5);
-            txtSprayTime.RectColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.RectDisableColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.RectReadOnlyColor = Color.FromArgb(218, 220, 230);
-            txtSprayTime.ShowText = false;
-            txtSprayTime.Size = new Size(126, 29);
-            txtSprayTime.TabIndex = 398;
-            txtSprayTime.Text = "0";
-            txtSprayTime.TextAlignment = ContentAlignment.MiddleCenter;
-            txtSprayTime.Type = UITextBox.UIEditType.Integer;
-            txtSprayTime.Watermark = "请输入";
-            // 
-            // uiLabel1
-            // 
-            uiLabel1.AutoSize = true;
-            uiLabel1.BackColor = Color.Transparent;
-            uiLabel1.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            uiLabel1.ForeColor = Color.FromArgb(46, 46, 46);
-            uiLabel1.Location = new Point(160, 111);
-            uiLabel1.Name = "uiLabel1";
-            uiLabel1.Size = new Size(102, 26);
-            uiLabel1.TabIndex = 399;
-            uiLabel1.Text = "喷淋时间：";
-            uiLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tabPage2
             // 
@@ -521,55 +288,55 @@
             uiLabel3.Text = "产品类型";
             uiLabel3.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // btnParameter
-            // 
-            btnParameter.BackActive = Color.FromArgb(80, 160, 255);
-            btnParameter.BackColor = Color.FromArgb(80, 160, 255);
-            btnParameter.BorderWidth = 1F;
-            btnParameter.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            btnParameter.ForeColor = Color.White;
-            btnParameter.Location = new Point(1, 101);
-            btnParameter.Name = "btnParameter";
-            btnParameter.Size = new Size(131, 48);
-            btnParameter.TabIndex = 404;
-            btnParameter.Text = "参数设置";
-            btnParameter.Type = AntdUI.TTypeMini.Primary;
-            btnParameter.WaveSize = 1;
-            btnParameter.Click += btnParameter_Click;
-            // 
             // btnReport
             // 
-            btnReport.BackActive = Color.FromArgb(80, 160, 255);
-            btnReport.BackColor = Color.FromArgb(80, 160, 255);
+            btnReport.BackActive = Color.FromArgb(196, 199, 204);
+            btnReport.BackColor = Color.FromArgb(196, 199, 204);
             btnReport.BorderWidth = 1F;
-            btnReport.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
+            btnReport.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
             btnReport.ForeColor = Color.White;
-            btnReport.Location = new Point(138, 101);
+            btnReport.JoinMode = AntdUI.TJoinMode.Right;
+            btnReport.Location = new Point(120, 102);
             btnReport.Name = "btnReport";
-            btnReport.Size = new Size(131, 48);
-            btnReport.TabIndex = 405;
+            btnReport.Size = new Size(124, 35);
+            btnReport.TabIndex = 496;
             btnReport.Text = "报表模板";
             btnReport.Type = AntdUI.TTypeMini.Primary;
             btnReport.WaveSize = 1;
             btnReport.Click += btnReport_Click;
             // 
-            // ucTestParams
+            // btnParameter
+            // 
+            btnParameter.BackActive = Color.FromArgb(49, 54, 64);
+            btnParameter.BackColor = Color.White;
+            btnParameter.BorderWidth = 1F;
+            btnParameter.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
+            btnParameter.ForeColor = Color.Black;
+            btnParameter.JoinMode = AntdUI.TJoinMode.Left;
+            btnParameter.Location = new Point(0, 102);
+            btnParameter.Name = "btnParameter";
+            btnParameter.Size = new Size(119, 35);
+            btnParameter.TabIndex = 495;
+            btnParameter.Text = "参数界面";
+            btnParameter.Type = AntdUI.TTypeMini.Primary;
+            btnParameter.WaveSize = 1;
+            btnParameter.Click += btnParameter_Click;
+            // 
+            // UcTestParams
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(224, 224, 224);
+            Controls.Add(btnReport);
+            Controls.Add(btnParameter);
             Controls.Add(tabs1);
             Controls.Add(btnDelete);
             Controls.Add(uiGroupBox1);
-            Controls.Add(btnParameter);
-            Controls.Add(btnReport);
-            Name = "ucTestParams";
+            Name = "UcTestParams";
             Size = new Size(665, 660);
             uiGroupBox1.ResumeLayout(false);
             uiGroupBox1.PerformLayout();
             tabs1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -587,21 +354,9 @@
         private AntdUI.TabPage tabPage1;
         private AntdUI.TabPage tabPage2;
         private UILabel uiLabel3;
-        private AntdUI.Button btnParameter;
-        private AntdUI.Button btnReport;
-        private UILabel uiLabel7;
-        private UILabel uiLabel8;
-        private UILabel uiLabel5;
-        private UITextBox txtSprayKpa;
-        private UILabel uiLabel6;
-        private UILabel uiLabel4;
-        private UITextBox txtSprayTime;
-        private UILabel uiLabel1;
         private UILabel uiLabel9;
         private UITextBox txtType;
-        private UILabel uiLabel10;
-        private UILabel uiLabel11;
-        private UITextBox txtPressureRelief;
-        private UITextBox txtApplyPressure;
+        private AntdUI.Button btnReport;
+        private AntdUI.Button btnParameter;
     }
 }

@@ -1,5 +1,4 @@
-﻿using MainUI.Procedure.DSL;
-using MainUI.Service;
+﻿using MainUI.Service;
 
 namespace MainUI;
 public partial class frmMainMenu : Form
@@ -237,7 +236,7 @@ public partial class frmMainMenu : Form
          ("型号管理", new ucModelManage(), 9),
          ("项点管理", new ucItemManagerial(), 4),
          ("项点配置", new ucItemConfiguration(), 5),
-         ("试验参数", new ucTestParams(), 2)
+         ("试验参数", new UcTestParams(), 2)
       ];
 
     /// <summary>
@@ -431,9 +430,6 @@ public partial class frmMainMenu : Form
         {
             tslblPLC.Text += " 仿真模式 ";
         }
-
-        //var SysTime = $"系统运行时间：{TimeTrackingService.FormatTimeSpan(_timeTrackingService.GetSystemUptime())}";
-        //var RunTime = $"软件运行时间：{TimeTrackingService.FormatTimeSpan(_timeTrackingService.GetApplicationUptime())}";
     }
 
     private void frmMainMenu_FormClosing(object sender, FormClosingEventArgs e)

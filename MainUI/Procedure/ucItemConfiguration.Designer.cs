@@ -1,6 +1,6 @@
 ﻿using Padding = System.Windows.Forms.Padding;
 
-namespace MainUI.Procedure.DSL
+namespace MainUI.Procedure
 {
     partial class ucItemConfiguration
     {

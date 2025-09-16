@@ -102,8 +102,15 @@ namespace MainUI.Modules
         /// <param name="value"></param>
         public void SetAIZero(int index, double value)
         {
-            string opcTag = "AI.Zero" + index.ToString().PadLeft(2, '0');
-            this.Write(opcTag, value);
+            try
+            {
+                string opcTag = "AI.Zero" + index.ToString().PadLeft(2, '0');
+                this.Write(opcTag, value);
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"设置 AI零点[{index}] = {value} 失败", ex);
+            }
         }
 
 
@@ -114,8 +121,15 @@ namespace MainUI.Modules
         /// <param name="value"></param>
         public void SetAIGain(int index, double value)
         {
-            string opcTag = "AI.Gain" + index.ToString().PadLeft(2, '0');
-            this.Write(opcTag, value);
+            try
+            {
+                string opcTag = "AI.Gain" + index.ToString().PadLeft(2, '0');
+                this.Write(opcTag, value);
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"设置 AI增益[{index}] = {value} 失败", ex);
+            }
         }
 
         /// <summary>
@@ -125,8 +139,15 @@ namespace MainUI.Modules
         /// <param name="value"></param>
         public void SetAOZero(int index, double value)
         {
-            string opcTag = "AO.Zero" + index.ToString().PadLeft(2, '0');
-            this.Write(opcTag, value);
+            try
+            {
+                string opcTag = "AO.Zero" + index.ToString().PadLeft(2, '0');
+                this.Write(opcTag, value);
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"设置 AO零点[{index}] = {value} 失败", ex);
+            }
         }
 
 
@@ -137,8 +158,15 @@ namespace MainUI.Modules
         /// <param name="value"></param>
         public void SetAOGain(int index, double value)
         {
-            string opcTag = "AO.Gain" + index.ToString().PadLeft(2, '0');
-            this.Write(opcTag, value);
+            try
+            {
+                string opcTag = "AO.Gain" + index.ToString().PadLeft(2, '0');
+                this.Write(opcTag, value);
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"设置 AO增益[{index}] = {value} 失败", ex);
+            }
         }
 
     }

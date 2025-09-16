@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RW.Modules;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MainUI.CurrencyHelper;
-using RW.Modules;
 
 namespace MainUI.Modules
 {
@@ -39,8 +32,15 @@ namespace MainUI.Modules
             }
             set
             {
-                string tag = index.ToString().PadLeft(3, '0');
-                this.Write("DO.MDO" + tag, value);
+                try
+                {
+                    string tag = index.ToString().PadLeft(3, '0');
+                    this.Write("DO.MDO" + tag, value);
+                }
+                catch (Exception ex)
+                {
+                    NlogHelper.Default.Error($"写入 DO[{index}] = {value} 失败", ex);
+                }
             }
         }
         public void Fresh()

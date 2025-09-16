@@ -11,13 +11,26 @@ namespace MainUI.Service
         /// <summary>
         /// 初始化表格列
         /// </summary>
-        public void InitColumns()
+        public void InittializeColumns()
         {
             table.Columns =
             [
-                new ColumnCheck("Check") { Checked = true },
-                new Column("ItemName", "项点名称") { Align = ColumnAlign.Left, Width = "285" },
+               new ColumnCheck("Check"){ Checked = true },
+               new Column("ItemName", "项点名称"){ Align = ColumnAlign.Left, Width = "274" },
+               new Column("ItemKey", "Key"){ Visible = false ,Align = ColumnAlign.Left },
             ];
+            table.SetRowStyle += TableItemPoint_SetRowStyle;
+        }
+
+        /// <summary>
+        /// 设置行样式事件处理程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private Table.CellStyleInfo TableItemPoint_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
+        {
+            return SetRowStyle(e.Record);
         }
 
         /// <summary>

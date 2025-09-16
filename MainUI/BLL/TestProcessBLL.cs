@@ -12,6 +12,7 @@
                {
                    ID = item.ID,
                    ProcessName = item.ProcessName,
+                   EntityClassName = item.EntityClassName,
                    IsVisible = item.IsVisible
                });
 
@@ -27,6 +28,7 @@
               {
                   ID = item.ID,
                   ProcessName = item.ProcessName,
+                  EntityClassName = item.EntityClassName,
                   IsVisible = item.IsVisible
               });
 
@@ -57,6 +59,7 @@
             VarHelper.fsql.Update<TestProcessModel>()
             .Set(s => s.ProcessName, model.ProcessName)
             .Set(s => s.IsVisible, model.IsVisible)
+            .Set(s => s.EntityClassName, model.EntityClassName)
             .Where(w => w.ID == model.ID)
             .ExecuteAffrows() > 0;
     }

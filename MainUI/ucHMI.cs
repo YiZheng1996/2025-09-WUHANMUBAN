@@ -354,20 +354,22 @@ namespace MainUI
         {
             _itemPoints.ForEach(i => { i.ColorState = 0; });
             // 初始化所有项点类
-            DicTestItems = new Dictionary<TaskInfo, BaseTest>
-            {
-                { new TaskInfo { TaskName = "试验测试1",
-                    CancellationTokenSource = new CancellationTokenSource() },
-                    new AirTightnessTest() },
+            //DicTestItems = new Dictionary<TaskInfo, BaseTest>
+            //{
+            //    { new TaskInfo { TaskName = "试验测试1",
+            //        CancellationTokenSource = new CancellationTokenSource() },
+            //        new AirTightnessTest() },
 
-                { new TaskInfo { TaskName = "试验测试2",
-                    CancellationTokenSource = new CancellationTokenSource() },
-                    new StaticWaterTightnessTest() },
+            //    { new TaskInfo { TaskName = "试验测试2",
+            //        CancellationTokenSource = new CancellationTokenSource() },
+            //        new StaticWaterTightnessTest() },
 
-                { new TaskInfo { TaskName = "试验测试3",
-                    CancellationTokenSource = new CancellationTokenSource() },
-                    new DynamicWaterTightnessTest() }
-            };
+            //    { new TaskInfo { TaskName = "试验测试3",
+            //        CancellationTokenSource = new CancellationTokenSource() },
+            //        new DynamicWaterTightnessTest() }
+            //};
+
+            DicTestItems = MainUI.Service.TestItemsServer.GenerateTestItemsFromConfig();
 
             // 根据Key找到对应的测试项
             foreach (var item in _itemPoints.Where(p => p.Check))

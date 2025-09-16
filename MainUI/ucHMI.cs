@@ -350,42 +350,155 @@ namespace MainUI
         }
 
         // 试验项点启动
-        private async Task BackgroundWorker(CancellationTokenSource source)
+        private async void BackgroundWorker(CancellationTokenSource source)
         {
-            _itemPoints.ForEach(i => { i.ColorState = 0; });
-            // 初始化所有项点类
-            //DicTestItems = new Dictionary<TaskInfo, BaseTest>
-            //{
-            //    { new TaskInfo { TaskName = "试验测试1",
-            //        CancellationTokenSource = new CancellationTokenSource() },
-            //        new AirTightnessTest() },
-
-            //    { new TaskInfo { TaskName = "试验测试2",
-            //        CancellationTokenSource = new CancellationTokenSource() },
-            //        new StaticWaterTightnessTest() },
-
-            //    { new TaskInfo { TaskName = "试验测试3",
-            //        CancellationTokenSource = new CancellationTokenSource() },
-            //        new DynamicWaterTightnessTest() }
-            //};
-
-            DicTestItems = MainUI.Service.TestItemsServer.GenerateTestItemsFromConfig();
-
-            // 根据Key找到对应的测试项
-            foreach (var item in _itemPoints.Where(p => p.Check))
+            try
             {
-                var taskInfo = DicTestItems.Keys.FirstOrDefault(t => t.TaskName == item.ItemName);
-                if (taskInfo != null && DicTestItems.TryGetValue(taskInfo, out var test))
+                _itemPoints.ForEach(i => { i.ColorState = 0; });
+
+                // 动态初始化所有项点类
+                DicTestItems = CreateDynamicTestItemsAsync();
+
+                if (DicTestItems.Count == 0)
                 {
-                    TableColor(item, 1);
-                    await test.Execute(taskInfo.CancellationTokenSource.Token);
-                    TableColor(item, 2);
+                    NlogHelper.Default.Debug("未找到可执行的测试项");
+                    return;
+                }
+
+                NlogHelper.Default.Debug($"已加载 {DicTestItems.Count} 个测试项");
+
+                // 根据Key找到对应的测试项并执行
+                foreach (var item in _itemPoints.Where(p => p.Check))
+                {
+                    if (source.IsCancellationRequested)
+                    {
+                        NlogHelper.Default.Debug("测试被取消");
+                        break;
+                    }
+
+                    var taskInfo = DicTestItems.Keys.FirstOrDefault(t => t.TaskName == item.ItemName);
+                    if (taskInfo != null && DicTestItems.TryGetValue(taskInfo, out var test))
+                    {
+                        try
+                        {
+                            NlogHelper.Default.Debug($"开始执行：{item.ItemName}");
+                            NlogHelper.Default.Debug("测试被取消");
+
+                            bool result = await test.Execute(taskInfo.CancellationTokenSource.Token);
+
+                            TableColor(item, result ? 2 : 3); // 设置为成功或失败状态
+                            NlogHelper.Default.Debug($"完成执行：{item.ItemName} - {(result ? "成功" : "失败")}");
+                        }
+                        catch (OperationCanceledException)
+                        {
+                            TableColor(item, 3); // 设置为取消状态
+                            NlogHelper.Default.Debug($"测试项被取消：{item.ItemName}");
+                        }
+                        catch (Exception ex)
+                        {
+                            TableColor(item, 3); // 设置为错误状态
+                            NlogHelper.Default.Debug($"测试项执行错误：{item.ItemName} - {ex.Message}");
+                            NlogHelper.Default.Error($"测试项执行错误：{item.ItemName}", ex);
+                        }
+                    }
+                    else
+                    {
+                        NlogHelper.Default.Debug($"未找到测试项实现：{item.ItemName}");
+                        TableColor(item, 3); // 设置为错误状态
+                    }
                 }
             }
-            IsTestEnd();
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error("测试执行发生错误", ex);
+            }
+            finally
+            {
+                IsTestEnd();
+            }
         }
 
-        // 设置行颜色
+        /// <summary>
+        /// 根据TestProcessModel动态创建测试项字典
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<TaskInfo, BaseTest> CreateDynamicTestItemsAsync()
+        {
+            var testItems = new Dictionary<TaskInfo, BaseTest>();
+
+            try
+            {
+                // 获取当前选中的测试步骤
+                TestStepBLL stepBLL = new();
+                var testSteps = stepBLL.GetTestItems(VarHelper.TestViewModel.ID);
+
+                if (testSteps?.Count == 0)
+                {
+                    NlogHelper.Default.Debug("未配置测试步骤");
+                    return testItems;
+                }
+
+                foreach (var step in testSteps.Where(s => s.IsVisible))
+                {
+                    try
+                    {
+                        // 获取对应的TestProcess信息
+                        TestProcessBLL processBLL = new();
+                        var processModel = processBLL.GetTestProcess()
+                            .FirstOrDefault(p => p.ID == step.TestProcessID);
+
+                        if (processModel == null)
+                        {
+                            NlogHelper.Default.Debug($"未找到测试流程：{step.TestProcessName}");
+                            continue;
+                        }
+
+                        if (string.IsNullOrEmpty(processModel.EntityClassName))
+                        {
+                            NlogHelper.Default.Debug($"测试流程 {processModel.ProcessName} 未配置实体类名");
+                            continue;
+                        }
+
+                        // 检查测试类型是否已注册
+                        if (!TestFactory.IsTestTypeRegistered(processModel.EntityClassName))
+                        {
+                            NlogHelper.Default.Debug($"未注册的测试类型：{processModel.EntityClassName}");
+                            continue;
+                        }
+
+                        // 创建TaskInfo
+                        var taskInfo = new TaskInfo
+                        {
+                            TaskName = processModel.ProcessName,
+                            CancellationTokenSource = new CancellationTokenSource()
+                        };
+
+                        // 动态创建测试实例
+                        var testInstance = TestFactory.CreateTest(processModel.EntityClassName);
+
+                        testItems.Add(taskInfo, testInstance);
+                        NlogHelper.Default.Debug($"已加载测试项：{processModel.ProcessName} -> {processModel.EntityClassName}");
+                    }
+                    catch (Exception ex)
+                    {
+                        NlogHelper.Default.Debug($"创建测试项失败：{step.TestProcessName} - {ex.Message}");
+                        NlogHelper.Default.Error($"创建测试项失败：{step.TestProcessName}", ex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error("加载测试配置失败", ex);
+            }
+
+            return testItems;
+        }
+
+        /// <summary>
+        /// 扩展TableColor方法，支持更多状态
+        /// </summary>
+        /// <param name="itemPoint">项点</param>
+        /// <param name="state">状态：0-默认，1-执行中，2-成功，3-失败/错误</param>
         private void TableColor(ItemPointModel itemPoint, int state)
         {
             itemPoint.ColorState = state;
@@ -416,7 +529,6 @@ namespace MainUI
                 MessageHelper.MessageOK($"Task释放资源错误：{ex.Message}");
             }
         }
-
 
         private void btnStopTest_Click(object sender, EventArgs e) => IsTestEnd();
 

@@ -11,8 +11,8 @@
             {
                 // 执行测试逻辑
                 await Task.Delay(1000, cancellationToken);
-                Delay(90, 100, cancellationToken, 
-                    () => OPCHelper.TestCongrp[123].ToString() == "10");
+                //Delay(90, 100, cancellationToken, 
+                //    () => OPCHelper.TestCongrp[123].ToString() == "10");
                 return true;
             }
             finally

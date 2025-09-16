@@ -10,7 +10,7 @@
             try
             {
                 // 执行测试逻辑
-                await Task.Delay(10000, cancellationToken);
+                await Task.Delay(1000, cancellationToken);
                 return true;
             }
             finally

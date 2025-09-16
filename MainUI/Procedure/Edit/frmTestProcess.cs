@@ -17,10 +17,17 @@
             try
             {
                 string ProcessName = txtProcessName.Text.Trim();
+                string EntityClassName = txtEntityClassName.Text.Trim();
                 bool IsVisible = RadioIsVisible.Checked;
                 if (string.IsNullOrEmpty(ProcessName))
                 {
                     MessageHelper.MessageOK(this, "未输入项点名称！");
+                    txtProcessName.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(EntityClassName))
+                {
+                    MessageHelper.MessageOK(this, "未输入关联实体类名称！");
                     txtProcessName.Focus();
                     return;
                 }
@@ -31,6 +38,7 @@
                     var newModel = new TestProcessModel
                     {
                         ProcessName = txtProcessName.Text,
+                        EntityClassName = txtEntityClassName.Text,
                         IsVisible = IsVisible,
                     };
                     result = _processBLL.AddTestProcess(newModel);
@@ -38,6 +46,7 @@
                 else
                 {
                     _processModel.ProcessName = ProcessName;
+                    EntityClassName = txtEntityClassName.Text;
                     _processModel.IsVisible = IsVisible;
                     result = _processBLL.SaveTestProcess(_processModel);
                 }
@@ -65,6 +74,8 @@
             if (_processModel != null)
             {
                 txtProcessName.Text = _processModel.ProcessName;
+                txtEntityClassName.Text = _processModel.EntityClassName;
+
                 if (_processModel.IsVisible)
                 {
                     RadioIsVisible.Checked = true;

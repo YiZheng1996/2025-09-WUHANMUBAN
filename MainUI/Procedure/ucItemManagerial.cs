@@ -36,7 +36,7 @@ namespace MainUI.Procedure
 
         private void LoadData(TestProcessModel model)
         {
-            using frmTestProcess edit = new(model);
+            using FrmTestProcess edit = new(model);
             edit.ShowDialog();
             LoadData();
         }

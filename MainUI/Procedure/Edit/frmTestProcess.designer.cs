@@ -1,6 +1,6 @@
 ﻿namespace MainUI
 {
-    partial class frmTestProcess
+    partial class FrmTestProcess
     {
         /// <summary>
         /// 必需的设计器变量。

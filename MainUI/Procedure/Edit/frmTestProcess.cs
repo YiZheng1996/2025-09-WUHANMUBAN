@@ -1,12 +1,12 @@
 ﻿namespace MainUI
 {
-    public partial class frmTestProcess : UIForm
+    public partial class FrmTestProcess : UIForm
     {
-        public frmTestProcess() => InitializeComponent();
+        public FrmTestProcess() => InitializeComponent();
 
         private readonly TestProcessBLL _processBLL = new();
         private readonly TestProcessModel _processModel;
-        public frmTestProcess(TestProcessModel model)
+        public FrmTestProcess(TestProcessModel model)
         {
             InitializeComponent();
             _processModel = model;

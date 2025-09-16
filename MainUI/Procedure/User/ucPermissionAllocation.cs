@@ -27,7 +27,7 @@
             {
                 RoleBLL roleBLL = new();
                 cboRole.DataSource = roleBLL.GetRoles();
-                cboRole.DisplayMember = $"Describe";
+                cboRole.DisplayMember = $"RoleName";
                 cboRole.ValueMember = "ID";
             }
             catch (Exception ex)

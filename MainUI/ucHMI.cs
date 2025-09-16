@@ -1,13 +1,13 @@
 ﻿using AntdUI;
 using MainUI.Service;
 using Label = System.Windows.Forms.Label;
-using Timer = System.Windows.Forms.Timer;
 
 namespace MainUI
 {
     public partial class UcHMI : UserControl
     {
         #region 全局变量
+        private readonly RW.Report rWReport = new();
         private readonly frmMainMenu frm = new();
         public delegate void RunStatusHandler(bool obj);
         public event RunStatusHandler EmergencyStatusChanged;
@@ -18,10 +18,7 @@ namespace MainUI
         public delegate void TestStateHandler(bool isTesting);
         public event TestStateHandler TestStateChanged;
         private readonly string reportPath;
-        private readonly string dslPath;
         private readonly OPCEventRegistration _opcEventRegistration;
-        private readonly DSLService _dslService;
-        private readonly TestExecutionService _testService;
         private readonly ReportService _reportService;
         private readonly TableService _tableService;
         private readonly CountdownService _countdownService;
@@ -36,10 +33,7 @@ namespace MainUI
             InitializeComponent();
             _opcEventRegistration = new OPCEventRegistration(this);
             reportPath = Path.Combine(Application.StartupPath, Constants.ReportsPath);
-            dslPath = Path.Combine(Application.StartupPath, Constants.ProcedurePath);
-            _dslService = new DSLService(dslPath);
             _reportService = new ReportService(reportPath);
-            _testService = new TestExecutionService(_dslService, TableColor);
             _tableService = new TableService(TableItemPoint, _itemPoints);
             _countdownService = new CountdownService(LabTestTime);
             _controlInitService = new ControlInitializationService(controls);
@@ -160,6 +154,34 @@ namespace MainUI
 
             Refresh(); // 触发UI更新
         }
+
+        private void InitializeReport(string Path)
+        {
+            try
+            {
+                string filePath = Application.StartupPath + "reports\\" + Path;
+                string path2 = Application.StartupPath + "reports\\report.xlsx";
+
+                if (rWReport.Filename != filePath)
+                {
+                    rWReport.Dock = DockStyle.Fill;
+                    if (!panelReport.Controls.Contains(rWReport))
+                        panelReport.Controls.Add(rWReport);
+
+                    SystemHelper.KillProcess("EXCEL");
+                    Thread.Sleep(200);
+                    File.Copy(filePath, path2, true);
+                    rWReport.Filename = path2;
+                    rWReport.Init();  //办公室暂时注释
+                }
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error("报表加载错误：", ex);
+            }
+        }
+
+
         #endregion
 
         #region 值改变事件
@@ -233,14 +255,10 @@ namespace MainUI
                 // 初始化测试项
                 _tableService.LoadTestItems();
 
-                // 加载DSL
-                _dslService.LoadDSL(VarHelper.TestViewModel.ID, paraconfig);
-
                 // 处理报表文件
                 if (!string.IsNullOrEmpty(paraconfig.RptFile))
                 {
-                    ucGrid1.LoadFile(_reportService
-                        .InitializeReportFile(paraconfig));
+                    InitializeReport(paraconfig.RptFile);
                 }
             }
             catch (Exception ex)
@@ -288,14 +306,12 @@ namespace MainUI
 
                 // 4. 并行执行倒计时和测试
                 var countdownTask = _countdownService.StartCountdown(
-                    paraconfig.SprayTime.ToInt(), 
+                    paraconfig.SprayTime.ToInt(),
                     _cancellationTokenSource.Token
                 );
 
-                var testTask = _testService.StartTest(_itemPoints);
-
                 // 5. 等待所有任务完成
-                await Task.WhenAll(countdownTask, testTask);
+                await Task.WhenAll(countdownTask);
             }
             catch (TaskCanceledException ex)
             {
@@ -350,8 +366,6 @@ namespace MainUI
                 AppendText("试验结束");
                 TestStateChanged?.Invoke(false);
 
-                // 停止测试服务
-                _testService.StopTest();
                 _countdownService.StopCountdown();
                 _cancellationTokenSource.Cancel();
             }
@@ -414,7 +428,7 @@ namespace MainUI
             currentRowIndex = Math.Max(0, currentRowIndex - pageSize);
 
             // 执行翻页
-            ucGrid1.PageTurning(currentRowIndex);
+            //ucGrid1.PageTurning(currentRowIndex);
         }
 
         /// <summary>
@@ -437,7 +451,7 @@ namespace MainUI
             }
 
             // 执行翻页
-            ucGrid1.PageTurning(currentRowIndex);
+            //ucGrid1.PageTurning(currentRowIndex);
         }
         #endregion
 
@@ -450,14 +464,12 @@ namespace MainUI
 
                 if (!ConfirmSaveReport()) return;  // 提示确认
 
-                string saveFilePath = _reportService.BuildSaveFilePath(VarHelper.TestViewModel.ModelName); // 保存路径
+                string saveFilePath = ReportService.BuildSaveFilePath(VarHelper.TestViewModel.ModelName); // 保存路径
 
-                _reportService.SaveTestRecord(saveFilePath, new TestRecordModel
+                ReportService.SaveTestRecord(new TestRecordModel
                 {
                     //TODO: 填充试验记录数据
                 }); // 保存记录
-
-                ucGrid1.SaveAsPdf(saveFilePath, saveFilePath);  // 导出PDF
 
                 MessageHelper.MessageOK("保存成功", TType.Success);
             }
@@ -558,7 +570,7 @@ namespace MainUI
             OPCHelper.TestCongrp[sder.Tag.ToInt32()] = false;
         }
 
-      
+
         #endregion
     }
 }

@@ -12,8 +12,8 @@ namespace MainUI.Procedure.User
         {
             Tables.Columns = [
                 new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
-                new Column("RoleName","角色名称"){ Align = ColumnAlign.Center , Width="auto" },
-                new Column("Describe","角色描述"){ Align = ColumnAlign.Center , Width="auto" },
+                new Column("RoleName","角色名称"){ Align = ColumnAlign.Center  },
+                new Column("Describe","角色描述"){ Align = ColumnAlign.Center  },
            ];
             Tables.DataSource = roleBLL.GetRoles();
         }

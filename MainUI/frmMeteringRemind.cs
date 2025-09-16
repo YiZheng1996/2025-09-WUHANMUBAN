@@ -17,13 +17,13 @@ namespace MainUI
         {
             Tables.Columns = [
                 new Column("ID","ID"){ Align = ColumnAlign.Center , Visible=false},
-                new Column("InspectType","类型"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("InspectName","名称"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("CurrenDate","当前检查日期"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("NextDate","下次检查日期"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("InspectDescribe","检查说明"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("Cycle","周期/天"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("Buttns","操作",ColumnAlign.Center){ Width = "150"}
+                new Column("InspectType","类型"){ Align = ColumnAlign.Center},
+                new Column("InspectName","名称"){ Align = ColumnAlign.Center},
+                new Column("CurrenDate","当前检查日期"){ Align = ColumnAlign.Center},
+                new Column("NextDate","下次检查日期"){ Align = ColumnAlign.Center},
+                new Column("InspectDescribe","检查说明"){ Align = ColumnAlign.Center},
+                new Column("Cycle","周期/天"){ Align = ColumnAlign.Center},
+                new Column("Buttns","操作",ColumnAlign.Center){}
            ];
             Tables.DataSource = RemindBLL.GetMeteringReminds();
         }

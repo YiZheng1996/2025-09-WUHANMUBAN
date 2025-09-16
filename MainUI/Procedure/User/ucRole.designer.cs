@@ -101,6 +101,7 @@
             Tables.ColumnFont = new Font("微软雅黑", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
             Tables.ColumnFore = Color.White;
             Tables.DefaultExpand = true;
+            Tables.Gap = 12;
             Tables.Name = "Tables";
             Tables.RowHeight = 50;
             Tables.RowHeightHeader = 40;

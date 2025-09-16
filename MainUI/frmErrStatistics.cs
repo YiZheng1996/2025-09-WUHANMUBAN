@@ -17,9 +17,9 @@ namespace MainUI
         {
             Tables.Columns = [
                new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
-               new Column("ErrType","问题类型"){ Align = ColumnAlign.Center,Width="auto"},
-               new Column("ErrContent","详细内容"){ Align = ColumnAlign.Center,Width="auto"},
-               new Column("ErrDate","当前检查日期"){ Align = ColumnAlign.Center,Width="auto"},
+               new Column("ErrType","问题类型"){ Align = ColumnAlign.Center},
+               new Column("ErrContent","详细内容"){ Align = ColumnAlign.Center},
+               new Column("ErrDate","当前检查日期"){ Align = ColumnAlign.Center},
            ];
             Tables.DataSource = errStatisticsBLL.GetErrStatistics();
         }

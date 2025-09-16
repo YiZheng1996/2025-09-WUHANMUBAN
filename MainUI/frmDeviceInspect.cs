@@ -14,11 +14,11 @@ namespace MainUI
         {
             Tables.Columns = [
                 new Column("ID","ID"){ Align = ColumnAlign.Center , Visible=false},
-                new Column("PartType","部件类型"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("PartName","部件名称"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("ActionNumber","动作次数"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("UseDuration","使用时长(天)"){ Align = ColumnAlign.Center,Width="auto"},
-                new Column("Buttns","操作",ColumnAlign.Center){ Width = "130"}
+                new Column("PartType","部件类型"){ Align = ColumnAlign.Center},
+                new Column("PartName","部件名称"){ Align = ColumnAlign.Center},
+                new Column("ActionNumber","动作次数"){ Align = ColumnAlign.Center},
+                new Column("UseDuration","使用时长(天)"){ Align = ColumnAlign.Center},
+                new Column("Buttns","操作",ColumnAlign.Center){/* Width = "130"*/}
            ];
             Tables.DataSource = deviceBLL.GetDeviceInspects();
         }

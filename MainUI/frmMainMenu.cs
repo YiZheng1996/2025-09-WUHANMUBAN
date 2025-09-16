@@ -1,6 +1,5 @@
 ﻿using MainUI.Procedure.DSL;
 using MainUI.Service;
-using Timer = System.Windows.Forms.Timer;
 
 namespace MainUI;
 public partial class frmMainMenu : Form
@@ -275,7 +274,7 @@ public partial class frmMainMenu : Form
     /// <summary>
     /// 检查是否为受限节点
     /// </summary>
-    private static bool IsRestrictedNode(string nodeName) => 
+    private static bool IsRestrictedNode(string nodeName) =>
         nodeName is "权限管理" or "权限分配";
 
     /// <summary>
@@ -439,7 +438,7 @@ public partial class frmMainMenu : Form
 
     private void frmMainMenu_FormClosing(object sender, FormClosingEventArgs e)
     {
-   
+
     }
     #endregion
 }

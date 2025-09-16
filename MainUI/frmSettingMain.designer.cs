@@ -99,7 +99,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmSettingMain";
-            RectColor = Color.FromArgb(42, 47, 55);
+            RectColor = Color.FromArgb(65, 100, 204);
             ShowIcon = false;
             ShowInTaskbar = false;
             TitleColor = Color.FromArgb(65, 100, 204);

@@ -32,7 +32,7 @@ namespace MainUI.Service
         /// </summary>
         /// <param name="modelName">型号名称</param>
         /// <returns></returns>
-        public string BuildSaveFilePath(string modelName)
+        public static string BuildSaveFilePath(string modelName)
         {
             string rootPath = Path.Combine(Application.StartupPath, "Save");
             Directory.CreateDirectory(rootPath);
@@ -44,12 +44,16 @@ namespace MainUI.Service
         /// <summary>
         /// 保存测试记录
         /// </summary>
-        /// <param name="filePath"></param>
         /// <param name="record"></param>
-        public void SaveTestRecord(string filePath, TestRecordModel record)
+        public static void SaveTestRecord(TestRecordModel record)
         {
             var recordBll = new TestRecordNewBLL();
             recordBll.SaveTestRecord(record);
         }
+    }
+
+    static class Constants
+    {
+        public const string ReportsPath = @"reports\report.xlsx";
     }
 }

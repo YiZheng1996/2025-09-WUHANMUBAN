@@ -36,10 +36,10 @@ namespace MainUI
         {
             Tables.Columns = [
                new Column("ID","型号"){ Align = ColumnAlign.Center , Visible = false },
-                new Column("ModelTypeID","类型ID"){ Align = ColumnAlign.Center , Width="auto" , Visible = false},
-                new Column("ModelTypeName","类型名称"){ Align = ColumnAlign.Center , Width="auto" , Visible = false},
-                new Column("ModelName","型号名称"){ Align = ColumnAlign.Center , Width="auto" },
-                 new Column("Mark","型号备注"){ Align = ColumnAlign.Center , Width="auto" },
+                new Column("ModelTypeID","类型ID"){ Align = ColumnAlign.Center ,  Visible = false},
+                new Column("ModelTypeName","类型名称"){ Align = ColumnAlign.Center , Visible = false},
+                new Column("ModelName","型号名称"){ Align = ColumnAlign.Center },
+                 new Column("Mark","型号备注"){ Align = ColumnAlign.Center },
            ];
             Tables.DataSource =
                 pbll.GetNewModels(cboType.SelectedValue.ToInt32());

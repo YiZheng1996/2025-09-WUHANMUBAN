@@ -30,10 +30,38 @@ namespace MainUI.Procedure.DSL
         /// </summary>
         private void InitializeComponent()
         {
+            grpTestProcess = new UIGroupBox();
             TableTestProcess = new AntdUI.Table();
+            btnEdit = new UIButton();
+            btnDelete = new UIButton();
             btnAdd = new UIButton();
-            btnDeleteAll = new UIButton();
+            grpTestProcess.SuspendLayout();
             SuspendLayout();
+            // 
+            // grpTestProcess
+            // 
+            grpTestProcess.BackColor = Color.FromArgb(236, 236, 237);
+            grpTestProcess.Controls.Add(TableTestProcess);
+            grpTestProcess.Controls.Add(btnEdit);
+            grpTestProcess.Controls.Add(btnDelete);
+            grpTestProcess.Controls.Add(btnAdd);
+            grpTestProcess.FillColor = Color.FromArgb(236, 236, 237);
+            grpTestProcess.FillColor2 = Color.FromArgb(236, 236, 237);
+            grpTestProcess.FillDisableColor = Color.FromArgb(236, 236, 237);
+            grpTestProcess.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
+            grpTestProcess.ForeColor = Color.Black;
+            grpTestProcess.ForeDisableColor = Color.Black;
+            grpTestProcess.Location = new Point(0, 0);
+            grpTestProcess.Margin = new Padding(4, 5, 4, 5);
+            grpTestProcess.MinimumSize = new Size(1, 1);
+            grpTestProcess.Name = "grpTestProcess";
+            grpTestProcess.Padding = new Padding(0, 32, 0, 0);
+            grpTestProcess.RectColor = Color.FromArgb(236, 236, 237);
+            grpTestProcess.RectDisableColor = Color.FromArgb(236, 236, 237);
+            grpTestProcess.Size = new Size(665, 655);
+            grpTestProcess.TabIndex = 403;
+            grpTestProcess.Text = "试验项点";
+            grpTestProcess.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // TableTestProcess
             // 
@@ -41,107 +69,95 @@ namespace MainUI.Procedure.DSL
             TableTestProcess.BackColor = Color.White;
             TableTestProcess.BackgroundImageLayout = ImageLayout.None;
             TableTestProcess.BorderColor = Color.Black;
+            TableTestProcess.Bordered = true;
             TableTestProcess.CheckSize = 20;
             TableTestProcess.ClipboardCopy = false;
             TableTestProcess.ColumnBack = Color.FromArgb(44, 62, 80);
             TableTestProcess.ColumnFont = new Font("微软雅黑", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
             TableTestProcess.ColumnFore = Color.White;
             TableTestProcess.DefaultExpand = true;
-            TableTestProcess.Dock = DockStyle.Bottom;
-            TableTestProcess.EditMode = AntdUI.TEditMode.DoubleClick;
-            TableTestProcess.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            TableTestProcess.Dock = DockStyle.Top;
+            TableTestProcess.Font = new Font("微软雅黑", 14.25F);
+            TableTestProcess.Gap = 12;
             TableTestProcess.ImeMode = ImeMode.NoControl;
-            TableTestProcess.Location = new Point(0, 50);
+            TableTestProcess.Location = new Point(0, 32);
             TableTestProcess.Name = "TableTestProcess";
             TableTestProcess.RightToLeft = RightToLeft.No;
             TableTestProcess.RowHeight = 50;
             TableTestProcess.RowHeightHeader = 40;
-            TableTestProcess.RowSelectedBg = Color.FromArgb(80, 160, 255);
-            TableTestProcess.RowSelectedFore = Color.White;
-            TableTestProcess.Size = new Size(665, 610);
+            TableTestProcess.Size = new Size(665, 570);
             TableTestProcess.SwitchSize = 25;
-            TableTestProcess.TabIndex = 399;
+            TableTestProcess.TabIndex = 407;
             TableTestProcess.CellClick += TableTestProcess_CellClick;
-            TableTestProcess.CellButtonClick += TableTestProcess_CellButtonClick;
+            // 
+            // btnEdit
+            // 
+            btnEdit.Cursor = Cursors.Hand;
+            btnEdit.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
+            btnEdit.ForeDisableColor = Color.White;
+            btnEdit.Location = new Point(364, 615);
+            btnEdit.MinimumSize = new Size(1, 1);
+            btnEdit.Name = "btnEdit";
+            btnEdit.RectDisableColor = Color.FromArgb(80, 160, 255);
+            btnEdit.Size = new Size(147, 37);
+            btnEdit.TabIndex = 395;
+            btnEdit.Text = "更改";
+            btnEdit.TipsFont = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            btnEdit.TipsText = "1";
+            btnEdit.Click += btnEdit_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Cursor = Cursors.Hand;
+            btnDelete.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
+            btnDelete.ForeDisableColor = Color.White;
+            btnDelete.Location = new Point(183, 615);
+            btnDelete.MinimumSize = new Size(1, 1);
+            btnDelete.Name = "btnDelete";
+            btnDelete.RectDisableColor = Color.FromArgb(80, 160, 255);
+            btnDelete.Size = new Size(147, 37);
+            btnDelete.TabIndex = 394;
+            btnDelete.Text = "删除";
+            btnDelete.TipsFont = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            btnDelete.TipsText = "1";
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnAdd
             // 
             btnAdd.Cursor = Cursors.Hand;
-            btnAdd.FillColor = Color.FromArgb(90, 124, 236);
-            btnAdd.FillColor2 = Color.FromArgb(90, 124, 236);
-            btnAdd.FillDisableColor = Color.FromArgb(153, 153, 161);
-            btnAdd.FillHoverColor = Color.FromArgb(90, 124, 236);
-            btnAdd.FillPressColor = Color.FromArgb(90, 124, 236);
-            btnAdd.FillSelectedColor = Color.FromArgb(90, 124, 236);
-            btnAdd.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
-            btnAdd.ForeColor = Color.FromArgb(235, 227, 221);
-            btnAdd.ForeDisableColor = Color.FromArgb(235, 227, 221);
-            btnAdd.LightColor = Color.FromArgb(253, 243, 243);
-            btnAdd.Location = new Point(3, 5);
+            btnAdd.Font = new Font("微软雅黑", 13F, FontStyle.Bold);
+            btnAdd.ForeDisableColor = Color.White;
+            btnAdd.Location = new Point(2, 615);
             btnAdd.MinimumSize = new Size(1, 1);
             btnAdd.Name = "btnAdd";
-            btnAdd.Radius = 7;
-            btnAdd.RectColor = Color.FromArgb(90, 124, 236);
-            btnAdd.RectDisableColor = Color.FromArgb(153, 153, 161);
-            btnAdd.RectHoverColor = Color.FromArgb(90, 124, 236);
-            btnAdd.RectPressColor = Color.FromArgb(90, 124, 236);
-            btnAdd.RectSelectedColor = Color.FromArgb(90, 124, 236);
+            btnAdd.RectDisableColor = Color.FromArgb(80, 160, 255);
             btnAdd.Size = new Size(147, 37);
-            btnAdd.Style = UIStyle.Custom;
-            btnAdd.StyleCustomMode = true;
-            btnAdd.TabIndex = 401;
-            btnAdd.Text = "添加行";
+            btnAdd.TabIndex = 393;
+            btnAdd.Text = "添加";
             btnAdd.TipsFont = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            btnAdd.TipsText = "1";
             btnAdd.Click += btnAdd_Click;
-            // 
-            // btnDeleteAll
-            // 
-            btnDeleteAll.Cursor = Cursors.Hand;
-            btnDeleteAll.FillColor = Color.FromArgb(230, 83, 100);
-            btnDeleteAll.FillColor2 = Color.FromArgb(230, 83, 100);
-            btnDeleteAll.FillDisableColor = Color.FromArgb(153, 153, 161);
-            btnDeleteAll.FillHoverColor = Color.FromArgb(235, 115, 115);
-            btnDeleteAll.FillPressColor = Color.FromArgb(184, 64, 64);
-            btnDeleteAll.FillSelectedColor = Color.FromArgb(184, 64, 64);
-            btnDeleteAll.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
-            btnDeleteAll.ForeColor = Color.FromArgb(235, 227, 221);
-            btnDeleteAll.ForeDisableColor = Color.FromArgb(235, 227, 221);
-            btnDeleteAll.LightColor = Color.FromArgb(253, 243, 243);
-            btnDeleteAll.Location = new Point(158, 5);
-            btnDeleteAll.MinimumSize = new Size(1, 1);
-            btnDeleteAll.Name = "btnDeleteAll";
-            btnDeleteAll.Radius = 7;
-            btnDeleteAll.RectColor = Color.FromArgb(230, 83, 100);
-            btnDeleteAll.RectDisableColor = Color.FromArgb(153, 153, 161);
-            btnDeleteAll.RectHoverColor = Color.FromArgb(235, 115, 115);
-            btnDeleteAll.RectPressColor = Color.FromArgb(184, 64, 64);
-            btnDeleteAll.RectSelectedColor = Color.FromArgb(184, 64, 64);
-            btnDeleteAll.Size = new Size(147, 37);
-            btnDeleteAll.Style = UIStyle.Custom;
-            btnDeleteAll.StyleCustomMode = true;
-            btnDeleteAll.TabIndex = 402;
-            btnDeleteAll.Text = "批量删除";
-            btnDeleteAll.TipsFont = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            btnDeleteAll.Click += btnDeleteAll_Click;
             // 
             // ucItemManagerial
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(236, 236, 236);
-            Controls.Add(btnDeleteAll);
-            Controls.Add(btnAdd);
-            Controls.Add(TableTestProcess);
+            Controls.Add(grpTestProcess);
             Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134);
             Margin = new Padding(3, 6, 3, 6);
             Name = "ucItemManagerial";
-            Size = new Size(665, 660);
+            Size = new Size(665, 655);
+            Load += ucItemManagerial_Load;
+            grpTestProcess.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private AntdUI.Table TableTestProcess;
+        private UIGroupBox grpTestProcess;
+        private UIButton btnEdit;
+        private UIButton btnDelete;
         private UIButton btnAdd;
-        private UIButton btnDeleteAll;
+        private AntdUI.Table TableTestProcess;
     }
 }

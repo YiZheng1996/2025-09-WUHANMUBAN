@@ -1,16 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace MainUI
 {
     static class Program
     {
-        /// <summary>
-        /// 全局服务提供者，用于整个应用程序
-        /// </summary>
-        public static IServiceProvider ServiceProvider { get; private set; }
-
         /// <summary>  
         /// 应用程序的主入口点
         /// </summary>  
@@ -148,7 +141,7 @@ namespace MainUI
                 OPCHelper.Connect();
 
                 // 获取主窗体
-                var mainForm = ServiceProvider.GetRequiredService<frmMainMenu>();
+                frmMainMenu mainForm = new();
 
                 // 运行主程序
                 Application.Run(mainForm);

@@ -69,13 +69,13 @@ namespace MainUI
                 [
                   new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
                   new Column("KindID","类型ID"){ Align = ColumnAlign.Center , Visible = false },
-                  new Column("ModelTypeName","类型名称"){ Align = ColumnAlign.Center , Width="auto"  },
+                  new Column("ModelTypeName","类型名称"){ Align = ColumnAlign.Center },
                   new Column("ModelID","型号ID"){ Align = ColumnAlign.Center , Visible = false },
-                  new Column("ModelName","型号名称"){ Align = ColumnAlign.Center , Width="auto"  },
-                  new Column("TestID","车型车号"){ Align = ColumnAlign.Center , Width="auto" },
-                  new Column("Tester","操作员"){ Align = ColumnAlign.Center , Width="auto" },
-                  new Column("TestTime","保存时间"){ Align = ColumnAlign.Center , Width="auto" },
-                  new Column("ReportPath","保存路径"){ Align = ColumnAlign.Center , Visible=false },
+                  new Column("ModelName","型号名称"){ Align = ColumnAlign.Center  },
+                  new Column("TestID","车型车号"){ Align = ColumnAlign.Center },
+                  new Column("Tester","操作员"){ Align = ColumnAlign.Center },
+                  new Column("TestTime","保存时间"){ Align = ColumnAlign.Center },
+                  new Column("ReportPath","保存路径"){ Align = ColumnAlign.Center , Visible = false },
                 ];
                 Tables.DataSource = data;
             }

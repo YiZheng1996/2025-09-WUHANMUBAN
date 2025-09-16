@@ -171,7 +171,6 @@ namespace MainUI
             uiLabel4 = new UILabel();
             LabAI01 = new UILabel();
             tabPage1 = new AntdUI.TabPage();
-            panelChart = new UIPanel();
             uiPanel6 = new UIPanel();
             minus = new PictureBox();
             LabelNumber = new UIDigitalLabel();
@@ -180,7 +179,7 @@ namespace MainUI
             btnPageUp = new UISymbolButton();
             btnPrintReport = new UISymbolButton();
             btnSaveReport = new UISymbolButton();
-            ucGrid1 = new Report.UcGrid();
+            panelReport = new UIPanel();
             btnWorkmanshipForms = new AntdUI.Button();
             btnReportForms = new AntdUI.Button();
             uiTitlePanel4 = new UITitlePanel();
@@ -215,7 +214,6 @@ namespace MainUI
             uiPanel2.SuspendLayout();
             uiPanel1.SuspendLayout();
             tabPage1.SuspendLayout();
-            panelChart.SuspendLayout();
             uiPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)minus).BeginInit();
             ((System.ComponentModel.ISupportInitialize)plus).BeginInit();
@@ -696,6 +694,7 @@ namespace MainUI
             tabs1.Pages.Add(tabPage3);
             tabs1.Pages.Add(tabPage1);
             tabs1.ScrollForeHover = SystemColors.ActiveBorder;
+            tabs1.SelectedIndex = 1;
             tabs1.Size = new Size(1425, 910);
             tabs1.Style = styleLine1;
             tabs1.TabIndex = 405;
@@ -705,7 +704,7 @@ namespace MainUI
             // 
             tabPage3.BackColor = Color.FromArgb(42, 47, 55);
             tabPage3.Controls.Add(grpRainy);
-            tabPage3.Location = new Point(3, 3);
+            tabPage3.Location = new Point(-1419, -904);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(1419, 904);
             tabPage3.TabIndex = 0;
@@ -2585,34 +2584,13 @@ namespace MainUI
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(panelChart);
-            tabPage1.Location = new Point(-1419, -904);
+            tabPage1.Controls.Add(uiPanel6);
+            tabPage1.Controls.Add(panelReport);
+            tabPage1.Location = new Point(3, 3);
             tabPage1.Name = "tabPage1";
             tabPage1.Size = new Size(1419, 904);
             tabPage1.TabIndex = 1;
             tabPage1.Text = "tabPage1";
-            // 
-            // panelChart
-            // 
-            panelChart.BackColor = Color.FromArgb(236, 236, 236);
-            panelChart.Controls.Add(uiPanel6);
-            panelChart.Controls.Add(ucGrid1);
-            panelChart.Dock = DockStyle.Fill;
-            panelChart.FillColor = Color.FromArgb(236, 236, 236);
-            panelChart.FillColor2 = Color.FromArgb(236, 236, 236);
-            panelChart.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            panelChart.Location = new Point(0, 0);
-            panelChart.Margin = new Padding(4, 5, 4, 5);
-            panelChart.MinimumSize = new Size(1, 1);
-            panelChart.Name = "panelChart";
-            panelChart.Padding = new Padding(1);
-            panelChart.Radius = 0;
-            panelChart.RectColor = Color.FromArgb(236, 236, 236);
-            panelChart.RectDisableColor = Color.FromArgb(236, 236, 236);
-            panelChart.Size = new Size(1419, 904);
-            panelChart.TabIndex = 399;
-            panelChart.Text = null;
-            panelChart.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // uiPanel6
             // 
@@ -2628,7 +2606,7 @@ namespace MainUI
             uiPanel6.FillColor2 = Color.White;
             uiPanel6.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
             uiPanel6.ForeColor = Color.FromArgb(46, 46, 46);
-            uiPanel6.Location = new Point(1213, 0);
+            uiPanel6.Location = new Point(1212, 0);
             uiPanel6.Margin = new Padding(4, 5, 4, 5);
             uiPanel6.MinimumSize = new Size(1, 1);
             uiPanel6.Name = "uiPanel6";
@@ -2740,14 +2718,24 @@ namespace MainUI
             btnSaveReport.TipsFont = new Font("宋体", 11F);
             btnSaveReport.Click += btnSave_Click;
             // 
-            // ucGrid1
+            // panelReport
             // 
-            ucGrid1.Dock = DockStyle.Left;
-            ucGrid1.Location = new Point(1, 1);
-            ucGrid1.Name = "ucGrid1";
-            ucGrid1.Readonly = true;
-            ucGrid1.Size = new Size(1201, 902);
-            ucGrid1.TabIndex = 0;
+            panelReport.BackColor = Color.FromArgb(236, 236, 236);
+            panelReport.FillColor = Color.FromArgb(236, 236, 236);
+            panelReport.FillColor2 = Color.FromArgb(236, 236, 236);
+            panelReport.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            panelReport.Location = new Point(0, 0);
+            panelReport.Margin = new Padding(4, 5, 4, 5);
+            panelReport.MinimumSize = new Size(1, 1);
+            panelReport.Name = "panelReport";
+            panelReport.Padding = new Padding(1);
+            panelReport.Radius = 0;
+            panelReport.RectColor = Color.Black;
+            panelReport.RectDisableColor = Color.FromArgb(236, 236, 236);
+            panelReport.Size = new Size(1204, 904);
+            panelReport.TabIndex = 399;
+            panelReport.Text = null;
+            panelReport.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // btnWorkmanshipForms
             // 
@@ -2996,7 +2984,6 @@ namespace MainUI
             uiPanel1.ResumeLayout(false);
             uiPanel1.PerformLayout();
             tabPage1.ResumeLayout(false);
-            panelChart.ResumeLayout(false);
             uiPanel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)minus).EndInit();
             ((System.ComponentModel.ISupportInitialize)plus).EndInit();
@@ -3027,7 +3014,7 @@ namespace MainUI
         private UIButton btnStopTest;
         private AntdUI.Tabs tabs1;
         private AntdUI.TabPage tabPage3;
-        private UIPanel panelChart;
+        private UIPanel panelReport;
         private AntdUI.TabPage tabPage1;
         private AntdUI.Button btnWorkmanshipForms;
         private AntdUI.Button btnReportForms;
@@ -3041,7 +3028,6 @@ namespace MainUI
         private UITextBox txtModel;
         private UIPanel grpDO;
         private UIPanel LabTestTime;
-        private Report.UcGrid ucGrid1;
         private UIPanel uiPanel6;
         private PictureBox minus;
         private UIDigitalLabel LabelNumber;

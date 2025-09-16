@@ -19,9 +19,9 @@ namespace MainUI.Procedure.User
             Tables.Columns =
            [
                new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
-               new Column("Username","用户名"){ Align = ColumnAlign.Center , Width="auto" },
-               new Column("Role_ID","权限ID"){ Align = ColumnAlign.Center , Width="auto" },
-               new Column("Describe","权限"){ Align = ColumnAlign.Center , Width="auto" },
+               new Column("Role_ID","权限ID"){ Align = ColumnAlign.Center },
+               new Column("Username","用户名"){ Align = ColumnAlign.Center },
+               new Column("RoleName","权限名称"){ Align = ColumnAlign.Center },
            ];
             Tables.DataSource = bLL.GetUsers();
         }

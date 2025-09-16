@@ -110,9 +110,4 @@
         }
     }
 
-    static class Constants
-    {
-        public const string ReportsPath = @"reports\report.xlsx";
-        public const string ProcedurePath = @"\Procedure\";
-    }
 }

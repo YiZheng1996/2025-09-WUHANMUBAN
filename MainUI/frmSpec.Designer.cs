@@ -72,10 +72,10 @@
             cboType.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cboType.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
             cboType.Location = new Point(319, 48);
-            cboType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            cboType.Margin = new Padding(4, 5, 4, 5);
             cboType.MinimumSize = new Size(63, 0);
             cboType.Name = "cboType";
-            cboType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            cboType.Padding = new Padding(0, 0, 30, 2);
             cboType.Radius = 10;
             cboType.RectColor = Color.Gray;
             cboType.RectDisableColor = Color.Gray;
@@ -102,10 +102,10 @@
             cboModel.ItemHoverColor = Color.FromArgb(155, 200, 255);
             cboModel.ItemSelectForeColor = Color.FromArgb(235, 243, 255);
             cboModel.Location = new Point(301, 679);
-            cboModel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            cboModel.Margin = new Padding(4, 5, 4, 5);
             cboModel.MinimumSize = new Size(63, 0);
             cboModel.Name = "cboModel";
-            cboModel.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            cboModel.Padding = new Padding(0, 0, 30, 2);
             cboModel.Radius = 10;
             cboModel.RectColor = Color.FromArgb(218, 220, 230);
             cboModel.RectDisableColor = Color.FromArgb(218, 220, 230);
@@ -160,6 +160,7 @@
             Tables.ColumnFore = Color.White;
             Tables.DefaultExpand = true;
             Tables.Font = new Font("微软雅黑", 14.25F);
+            Tables.Gap = 12;
             Tables.ImeMode = ImeMode.NoControl;
             Tables.Location = new Point(15, 109);
             Tables.Name = "Tables";
@@ -200,11 +201,11 @@
             Controls.Add(btnSelectRow);
             Font = new Font("思源黑体 CN Bold", 11F, FontStyle.Bold);
             ForeColor = Color.FromArgb(235, 227, 221);
-            Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            Margin = new Padding(2, 3, 2, 3);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmSpec";
-            RectColor = Color.FromArgb(49, 54, 64);
+            RectColor = Color.FromArgb(65, 100, 204);
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "车型选择";

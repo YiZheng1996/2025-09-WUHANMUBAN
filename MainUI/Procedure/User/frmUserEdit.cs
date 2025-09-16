@@ -25,7 +25,7 @@
         {
             RoleBLL roleBLL = new();
             CboRole.DataSource = roleBLL.GetRoles();
-            CboRole.DisplayMember = "Describe";
+            CboRole.DisplayMember = "RoleName";
             CboRole.ValueMember = "ID";
         }
 

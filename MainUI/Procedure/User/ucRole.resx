@@ -238,7 +238,7 @@
     <value>Tables</value>
   </data>
   <data name="&gt;&gt;Tables.Type" xml:space="preserve">
-    <value>AntdUI.Table, AntdUI, Culture=neutral, PublicKeyToken=null</value>
+    <value>AntdUI.Table, AntdUI, Culture=neutral, PublicKeyToken=0e24e5118ea3d6af</value>
   </data>
   <data name="&gt;&gt;Tables.Parent" xml:space="preserve">
     <value>grpUser</value>
@@ -293,7 +293,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 665</value>
+    <value>665, 655</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucRole</value>

@@ -1,4 +1,5 @@
 ﻿using Report;
+using RW.UI.Controls.Report;
 
 namespace MainUI.Procedure.Test
 {
@@ -77,11 +78,11 @@ namespace MainUI.Procedure.Test
             set => _paraconfig = value;
         }
 
-        private static UcGrid ucGrid1;
-        public static Report.UcGrid ucGrid
+        private static RW.Report _report;
+        public static RW.Report Report
         {
-            get => ucGrid1;
-            set => ucGrid1 = value;
+            get => _report;
+            set => _report = value;
         }
 
         private frmMainMenu _frm;

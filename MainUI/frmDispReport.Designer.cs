@@ -31,7 +31,6 @@ namespace MainUI
         private void InitializeComponent()
         {
             grpDI = new UIGroupBox();
-            ucGrid1 = new UcGrid();
             BtnPrint = new UIButton();
             BtnClose = new UIButton();
             btnPageUp = new UIButton();
@@ -43,7 +42,6 @@ namespace MainUI
             // 
             // grpDI
             // 
-            grpDI.Controls.Add(ucGrid1);
             grpDI.FillColor = Color.White;
             grpDI.FillColor2 = Color.White;
             grpDI.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
@@ -61,16 +59,6 @@ namespace MainUI
             grpDI.Text = "试验报表";
             grpDI.TextAlignment = ContentAlignment.MiddleCenter;
             grpDI.TitleAlignment = HorizontalAlignment.Center;
-            // 
-            // ucGrid1
-            // 
-            ucGrid1.Dock = DockStyle.Fill;
-            ucGrid1.Font = new Font("微软雅黑", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            ucGrid1.Location = new Point(0, 32);
-            ucGrid1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            ucGrid1.Name = "ucGrid1";
-            ucGrid1.Size = new Size(908, 647);
-            ucGrid1.TabIndex = 0;
             // 
             // BtnPrint
             // 
@@ -194,6 +182,5 @@ namespace MainUI
         private Sunny.UI.UIButton btnPageUp;
         private Sunny.UI.UIButton btnPageDown;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private UcGrid ucGrid1;
     }
 }

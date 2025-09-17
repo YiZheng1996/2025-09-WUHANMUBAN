@@ -43,5 +43,36 @@ namespace MainUI.Model
             }
         }
 
+
+        /// <summary>
+        /// 生成的类文件路径（仅用于显示，不存储到数据库）
+        /// </summary>
+        [Column(IsIgnore = true)]
+        public string ClassFilePath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(EntityClassName))
+                    return "";
+                return Path.Combine("MainUI", "Procedure", "Test", $"{EntityClassName}.cs");
+            }
+        }
+
+        /// <summary>
+        /// 类文件是否存在（仅用于显示，不存储到数据库）
+        /// </summary>
+        [Column(IsIgnore = true)]
+        public bool ClassFileExists
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(EntityClassName))
+                    return false;
+
+                string fullPath = Path.Combine(Application.StartupPath, "MainUI", "Procedure", "Test", $"{EntityClassName}.cs");
+                return File.Exists(fullPath);
+            }
+        }
+
     }
 }

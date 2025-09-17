@@ -18,7 +18,7 @@ namespace MainUI
         private List<ItemPointModel> _itemPoints = [];
         private readonly ControlMappings controls = new();
         private readonly ControlInitializationService _controlInitService;
-        public delegate void TestStateHandler(bool isTesting);
+        public delegate void TestStateHandler(bool isTesting, bool Exit = false);
         public event TestStateHandler TestStateChanged;
         private readonly string reportPath;
         private readonly OPCEventRegistration _opcEventRegistration;
@@ -315,7 +315,7 @@ namespace MainUI
 
                 // 2. 设置UI状态
                 Disable(true);
-                TestStateChanged?.Invoke(true);
+                TestStateChanged?.Invoke(true, true);
 
                 // 3. 初始化取消计时器令牌
                 _cancellationTokenSource = new CancellationTokenSource();
@@ -560,7 +560,7 @@ namespace MainUI
             {
                 Disable(false);
                 AppendText("试验结束");
-                TestStateChanged?.Invoke(false);
+                TestStateChanged?.Invoke(false, false);
                 CancelAllTestTasksAsync();
                 _countdownService.StopCountdown();
                 _cancellationTokenSource.Cancel();

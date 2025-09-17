@@ -46,7 +46,7 @@
                 else
                 {
                     _processModel.ProcessName = ProcessName;
-                    EntityClassName = txtEntityClassName.Text;
+                    _processModel.EntityClassName = txtEntityClassName.Text;
                     _processModel.IsVisible = IsVisible;
                     result = _processBLL.SaveTestProcess(_processModel);
                 }

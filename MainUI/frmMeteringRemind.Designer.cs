@@ -40,7 +40,7 @@
             btnEdit.Cursor = Cursors.Hand;
             btnEdit.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
             btnEdit.ForeDisableColor = Color.White;
-            btnEdit.Location = new Point(381, 748);
+            btnEdit.Location = new Point(381, 638);
             btnEdit.MinimumSize = new Size(1, 1);
             btnEdit.Name = "btnEdit";
             btnEdit.RectDisableColor = Color.FromArgb(80, 160, 255);
@@ -56,7 +56,7 @@
             btnDelete.Cursor = Cursors.Hand;
             btnDelete.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
             btnDelete.ForeDisableColor = Color.White;
-            btnDelete.Location = new Point(200, 748);
+            btnDelete.Location = new Point(200, 638);
             btnDelete.MinimumSize = new Size(1, 1);
             btnDelete.Name = "btnDelete";
             btnDelete.RectDisableColor = Color.FromArgb(80, 160, 255);
@@ -72,7 +72,7 @@
             btnAdd.Cursor = Cursors.Hand;
             btnAdd.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
             btnAdd.ForeDisableColor = Color.White;
-            btnAdd.Location = new Point(19, 748);
+            btnAdd.Location = new Point(19, 638);
             btnAdd.MinimumSize = new Size(1, 1);
             btnAdd.Name = "btnAdd";
             btnAdd.RectDisableColor = Color.FromArgb(80, 160, 255);
@@ -88,7 +88,7 @@
             btnClose.Cursor = Cursors.Hand;
             btnClose.Font = new Font("思源黑体 CN Bold", 12F, FontStyle.Bold);
             btnClose.ForeDisableColor = Color.White;
-            btnClose.Location = new Point(1323, 748);
+            btnClose.Location = new Point(1007, 638);
             btnClose.MinimumSize = new Size(1, 1);
             btnClose.Name = "btnClose";
             btnClose.RectDisableColor = Color.FromArgb(80, 160, 255);
@@ -113,13 +113,14 @@
             Tables.ColumnFore = Color.White;
             Tables.DefaultExpand = true;
             Tables.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            Tables.Gap = 12;
             Tables.ImeMode = ImeMode.NoControl;
             Tables.Location = new Point(19, 53);
             Tables.Name = "Tables";
             Tables.RightToLeft = RightToLeft.No;
             Tables.RowHeight = 50;
             Tables.RowHeightHeader = 40;
-            Tables.Size = new Size(1451, 686);
+            Tables.Size = new Size(1135, 576);
             Tables.SwitchSize = 25;
             Tables.TabIndex = 405;
             Tables.CellClick += Tables_CellClick;
@@ -130,7 +131,7 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(236, 236, 236);
-            ClientSize = new Size(1488, 795);
+            ClientSize = new Size(1171, 685);
             ControlBox = false;
             Controls.Add(Tables);
             Controls.Add(btnClose);

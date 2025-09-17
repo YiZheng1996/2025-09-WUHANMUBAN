@@ -72,7 +72,7 @@ namespace MainUI.CurrencyHelper
             // 从配置获取权限代码
             if (_controlPermissions.TryGetValue(control.Name, out string configCode))
             {
-                control.Tag = $"Permission:{configCode}";
+                control.Tag = $"{configCode}";
                 return configCode;
             }
 
@@ -94,8 +94,14 @@ namespace MainUI.CurrencyHelper
             {
                 if (userId == 1) return true; // 超级管理员
 
-                return _userPermissions.TryGetValue(userId, out var permissions) &&
-                       permissions.Contains(permissionCode);
+                if (_userPermissions.TryGetValue(userId, out var permissions))
+                {
+                    // 直接检查
+                    if (permissions.Contains(permissionCode))
+                        return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {

@@ -30,35 +30,14 @@ namespace MainUI
         /// </summary>
         private void InitializeComponent()
         {
-            grpDI = new UIGroupBox();
             BtnPrint = new UIButton();
             BtnClose = new UIButton();
             btnPageUp = new UIButton();
             btnPageDown = new UIButton();
-            numericUpDown1 = new NumericUpDown();
-            grpDI.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            inputNumber = new NumericUpDown();
+            grpReport = new UIPanel();
+            ((System.ComponentModel.ISupportInitialize)inputNumber).BeginInit();
             SuspendLayout();
-            // 
-            // grpDI
-            // 
-            grpDI.FillColor = Color.White;
-            grpDI.FillColor2 = Color.White;
-            grpDI.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
-            grpDI.ForeColor = Color.FromArgb(64, 64, 64);
-            grpDI.ForeDisableColor = Color.FromArgb(64, 64, 64);
-            grpDI.Location = new Point(26, 61);
-            grpDI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            grpDI.MinimumSize = new Size(1, 1);
-            grpDI.Name = "grpDI";
-            grpDI.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            grpDI.RectColor = Color.White;
-            grpDI.RectDisableColor = Color.White;
-            grpDI.Size = new Size(908, 679);
-            grpDI.TabIndex = 390;
-            grpDI.Text = "试验报表";
-            grpDI.TextAlignment = ContentAlignment.MiddleCenter;
-            grpDI.TitleAlignment = HorizontalAlignment.Center;
             // 
             // BtnPrint
             // 
@@ -67,7 +46,7 @@ namespace MainUI
             BtnPrint.FillDisableColor = Color.FromArgb(70, 75, 85);
             BtnPrint.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
             BtnPrint.ForeDisableColor = Color.White;
-            BtnPrint.Location = new Point(588, 759);
+            BtnPrint.Location = new Point(588, 762);
             BtnPrint.MinimumSize = new Size(1, 1);
             BtnPrint.Name = "BtnPrint";
             BtnPrint.Radius = 10;
@@ -86,7 +65,7 @@ namespace MainUI
             BtnClose.FillDisableColor = Color.FromArgb(70, 75, 85);
             BtnClose.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
             BtnClose.ForeDisableColor = Color.White;
-            BtnClose.Location = new Point(731, 759);
+            BtnClose.Location = new Point(731, 762);
             BtnClose.MinimumSize = new Size(1, 1);
             BtnClose.Name = "BtnClose";
             BtnClose.Radius = 10;
@@ -105,7 +84,7 @@ namespace MainUI
             btnPageUp.FillDisableColor = Color.FromArgb(70, 75, 85);
             btnPageUp.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
             btnPageUp.ForeDisableColor = Color.White;
-            btnPageUp.Location = new Point(113, 759);
+            btnPageUp.Location = new Point(113, 762);
             btnPageUp.MinimumSize = new Size(1, 1);
             btnPageUp.Name = "btnPageUp";
             btnPageUp.Radius = 10;
@@ -124,7 +103,7 @@ namespace MainUI
             btnPageDown.FillDisableColor = Color.FromArgb(70, 75, 85);
             btnPageDown.Font = new Font("思源黑体 CN Bold", 13F, FontStyle.Bold);
             btnPageDown.ForeDisableColor = Color.White;
-            btnPageDown.Location = new Point(309, 759);
+            btnPageDown.Location = new Point(309, 762);
             btnPageDown.MinimumSize = new Size(1, 1);
             btnPageDown.Name = "btnPageDown";
             btnPageDown.Radius = 10;
@@ -136,32 +115,50 @@ namespace MainUI
             btnPageDown.TipsText = "1";
             btnPageDown.Click += btnPageDown_Click;
             // 
-            // numericUpDown1
+            // inputNumber
             // 
-            numericUpDown1.Font = new Font("微软雅黑", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            numericUpDown1.Location = new Point(241, 765);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(55, 27);
-            numericUpDown1.TabIndex = 402;
-            numericUpDown1.TextAlign = HorizontalAlignment.Center;
-            numericUpDown1.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            inputNumber.Font = new Font("微软雅黑", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            inputNumber.Location = new Point(241, 768);
+            inputNumber.Name = "inputNumber";
+            inputNumber.Size = new Size(55, 27);
+            inputNumber.TabIndex = 402;
+            inputNumber.TextAlign = HorizontalAlignment.Center;
+            inputNumber.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            // 
+            // grpReport
+            // 
+            grpReport.BackColor = Color.Transparent;
+            grpReport.FillColor = Color.White;
+            grpReport.FillColor2 = Color.White;
+            grpReport.Font = new Font("宋体", 12F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            grpReport.Location = new Point(19, 49);
+            grpReport.Margin = new Padding(4, 5, 4, 5);
+            grpReport.MinimumSize = new Size(1, 1);
+            grpReport.Name = "grpReport";
+            grpReport.Radius = 10;
+            grpReport.RectColor = Color.White;
+            grpReport.RectDisableColor = Color.White;
+            grpReport.Size = new Size(918, 702);
+            grpReport.TabIndex = 403;
+            grpReport.Text = null;
+            grpReport.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // frmDispReport
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(956, 813);
-            Controls.Add(numericUpDown1);
+            Controls.Add(grpReport);
+            Controls.Add(inputNumber);
             Controls.Add(btnPageUp);
             Controls.Add(btnPageDown);
             Controls.Add(BtnClose);
             Controls.Add(BtnPrint);
-            Controls.Add(grpDI);
             Font = new Font("微软雅黑", 9F);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmDispReport";
-            RectColor = Color.FromArgb(49, 54, 64);
+            RectColor = Color.FromArgb(65, 100, 204);
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "试验结果";
@@ -170,17 +167,16 @@ namespace MainUI
             TopMost = true;
             ZoomScaleRect = new Rectangle(15, 15, 903, 724);
             Load += frmDispReport_Load;
-            grpDI.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)inputNumber).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private Sunny.UI.UIGroupBox grpDI;
         private Sunny.UI.UIButton BtnPrint;
         private Sunny.UI.UIButton BtnClose;
         private Sunny.UI.UIButton btnPageUp;
         private Sunny.UI.UIButton btnPageDown;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown inputNumber;
+        private UIPanel grpReport;
     }
 }

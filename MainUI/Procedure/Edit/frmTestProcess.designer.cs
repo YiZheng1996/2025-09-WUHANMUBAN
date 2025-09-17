@@ -172,6 +172,7 @@
             // RadioIsVisible
             // 
             RadioIsVisible.BackColor = Color.Transparent;
+            RadioIsVisible.Checked = true;
             RadioIsVisible.Font = new Font("微软雅黑", 12.5F);
             RadioIsVisible.Location = new Point(223, 141);
             RadioIsVisible.MinimumSize = new Size(1, 1);
@@ -221,7 +222,7 @@
             uiLabel3.Text = "是否启用";
             uiLabel3.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // frmTestProcess
+            // FrmTestProcess
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(236, 236, 236);
@@ -234,7 +235,7 @@
             MaximizeBox = false;
             MaximumSize = new Size(0, 0);
             MinimizeBox = false;
-            Name = "frmTestProcess";
+            Name = "FrmTestProcess";
             RectColor = Color.FromArgb(65, 100, 204);
             ShowIcon = false;
             ShowInTaskbar = false;

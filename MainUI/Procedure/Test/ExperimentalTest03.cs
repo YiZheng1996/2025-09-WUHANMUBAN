@@ -1,21 +1,23 @@
 ﻿namespace MainUI.Procedure.Test
 {
-    public class AirTightnessTest : BaseTest
+    public class ExperimentalTest03 : BaseTest
     {
         public override async Task<bool> Execute(CancellationToken cancellationToken)
         {
-            TestStatus(true);
-            TxtTips("开始测试");
-
             try
             {
                 // 执行测试逻辑
                 await Task.Delay(1000, cancellationToken);
                 return true;
             }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"ExperimentalTest03：{ex.Message}");
+                throw new($"ExperimentalTest03：{ex.Message}");
+            }
             finally
             {
-                TestStatus(false);
+                // 试验结束后的清理操作
             }
         }
     }

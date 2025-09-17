@@ -1,4 +1,5 @@
 ﻿using MainUI.Service;
+using System.Collections.Generic;
 
 namespace MainUI;
 public partial class frmMainMenu : Form
@@ -52,13 +53,10 @@ public partial class frmMainMenu : Form
             // 1. 初始化组件
             InitializeComponents();
 
-            // 2. 初始化权限
+            // 初始化权限
             InitializePermissions();
 
-            // 3. 初始化事件
-            InitializeEvents();
-
-            // 4. 初始化HMI
+            // 初始化HMI
             InitializeHMI();
         }
         catch (Exception ex)
@@ -73,6 +71,7 @@ public partial class frmMainMenu : Form
     private void InitializeComponents()
     {
         _hmi = new UcHMI { Dock = DockStyle.Fill };
+        InitializeEvents(); // 确保在变量初始化完成后再订阅事件
         _hmi.Init();
         _hardWare = new frmHardWare();
         _opcStatus = OPCHelper.opcStatus;
@@ -141,7 +140,7 @@ public partial class frmMainMenu : Form
     {
         if (!PermissionHelper.HasPermission(NewUsers.NewUserInfo.ID, permissionCode))
         {
-            MessageHelper.MessageOK("您没有执行此操作的权限！");
+            MessageHelper.MessageOK(this, "您没有执行此操作的权限！", AntdUI.TType.Error);
             return false;
         }
         return true;
@@ -149,7 +148,7 @@ public partial class frmMainMenu : Form
     #endregion
 
     #region 事件处理
-    private void OnTestStateChanged(bool isTesting) => UpdateControlsState(!isTesting);
+    private void OnTestStateChanged(bool isTesting, bool Exit = false) => UpdateControlsState(!isTesting, Exit);
 
     private void OnBaseTestStateChanged(bool isTesting) => UpdateControlsState(!isTesting);
 
@@ -163,13 +162,13 @@ public partial class frmMainMenu : Form
         PanelHmi.Enabled = enabled;
     }
 
-    private void UpdateControlsState(bool enabled)
+    private void UpdateControlsState(bool enabled, bool isTesting = false)
     {
         // 批量更新按钮状态
         var buttons = new[]
         {
             btnNLog, btnReports, btnHardwareTest, btnMainData,
-            btnChangePwd, btnExit, btnMeteringRemind, btnErrStatistics,
+            btnChangePwd, btnMeteringRemind, btnErrStatistics,
             btnDeviceDetection,
         };
 
@@ -177,6 +176,7 @@ public partial class frmMainMenu : Form
         {
             button.Enabled = enabled;
         }
+        btnExit.Enabled = !isTesting;
     }
     #endregion
 
@@ -420,7 +420,7 @@ public partial class frmMainMenu : Form
 
         // 更新用户信息
         var userInfo = NewUsers.NewUserInfo;
-        tslblUser.Text = $"当前登录用户： {userInfo.Username}  当前权限：{userInfo.Describe} ";
+        tslblUser.Text = $"当前登录用户： {userInfo.Username}  当前权限：{userInfo.RoleName} ";
 
         // 更新PLC状态
         tslblPLC.Text = _opcStatus.NoError ? " PLC连接正常 " : " PLC连接失败 ";

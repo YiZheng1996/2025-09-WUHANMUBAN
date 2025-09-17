@@ -49,6 +49,7 @@ namespace MainUI
                 throw new Exception("Sqlite数据库连接失败");
         }
 
+        private static Mutex applicationMutex;
         /// <summary>
         /// 确保只运行一个应用程序实例
         /// </summary>
@@ -57,7 +58,7 @@ namespace MainUI
             string softname = Application.ProductName;
             VarHelper.SoftName = softname;
 
-            using var mutex = new Mutex(true, softname, out bool createdNew);
+            applicationMutex = new Mutex(true, softname, out bool createdNew);
 
             if (!createdNew)
             {

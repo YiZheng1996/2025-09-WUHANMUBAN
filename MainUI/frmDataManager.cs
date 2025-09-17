@@ -1,12 +1,11 @@
 ﻿using AntdUI;
-using RW;
 
 namespace MainUI
 {
     public partial class frmDataManager : UIForm
     {
         private TestRecordModelDto RecordModel = new();
-        TestRecordNewBLL testRecord = new();
+        TestRecordNewBLL _testRecordBLL = new();
         public frmDataManager() => InitializeComponent();
 
         private void frmDataManager_Load(object sender, EventArgs e)
@@ -57,7 +56,7 @@ namespace MainUI
                 DateTime dateFrom = dtpStartBig.Value;
                 DateTime dateTo = dtpStartEnd.Value;
                 //TODO:模糊查询TestId字段及时间范围搜索
-                var data = testRecord.GetTestRecord(new TestRecordModel
+                var data = _testRecordBLL.GetTestRecord(new TestRecordModel
                 {
                     KindID = TypeID,
                     ModelID = Model,
@@ -98,14 +97,14 @@ namespace MainUI
                     return;
                 }
                 string filename = RecordModel.ReportPath.ToString();
-                string filenameNew = RecordModel.ReportPath + ".xlsx".ToString();
-                if (!File.Exists(filenameNew))
+                if (!File.Exists(filename))
                 {
                     MessageBox.Show("报表文件不存在或已经删除。", "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
                 frmDispReport report = new(filename);
-                report.ShowDialog();
+                VarHelper.ShowDialogWithOverlay(this, report);
             }
             catch (Exception ex)
             {
@@ -141,7 +140,7 @@ namespace MainUI
 
             if (MessageBox.Show("删除后无法恢复，确定要删除该条记录吗？", "系统提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                testRecord.DeleteTestRecord(RecordModel.ID);
+                _testRecordBLL.DeleteTestRecord(RecordModel.ID);
                 LoadData();
             }
         }

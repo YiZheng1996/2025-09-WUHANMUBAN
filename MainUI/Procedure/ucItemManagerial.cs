@@ -1,4 +1,5 @@
 ﻿using AntdUI;
+using System.Text;
 
 namespace MainUI.Procedure
 {
@@ -7,6 +8,8 @@ namespace MainUI.Procedure
         int RowCount = 0;
         private readonly TestProcessBLL ProcessBll = new();
         private TestProcessModel _processModel = new();
+        private readonly string TestClassPath = Path.Combine(Application.StartupPath, "MainUI", "Procedure", "Test");
+
         public ucItemManagerial() => InitializeComponent();
 
         // 初始化表单数据
@@ -15,7 +18,7 @@ namespace MainUI.Procedure
             TableTestProcess.Columns = [
                 new Column("ID","ID"){ Align = ColumnAlign.Center , Visible = false },
                 new Column("ProcessName","项点名称"){ Align = ColumnAlign.Center},
-                new Column("EntityClassName","关联实体类名称",ColumnAlign.Center),
+                new Column("EntityClassName","关联逻辑类名称"){ Align = ColumnAlign.Center},
                 new ColumnSwitch("Enable","启用",ColumnAlign.Center).SetAutoCheck(false),
             ];
             var data = ProcessBll.GetTestProcess();
@@ -88,5 +91,6 @@ namespace MainUI.Procedure
         {
             LoadData(_processModel);
         }
+
     }
 }

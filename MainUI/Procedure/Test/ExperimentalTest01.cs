@@ -1,23 +1,23 @@
 ﻿namespace MainUI.Procedure.Test
 {
-    public class DynamicWaterTightnessTest : BaseTest
+    public class ExperimentalTest01 : BaseTest
     {
         public override async Task<bool> Execute(CancellationToken cancellationToken)
         {
-            TestStatus(true);
-            TxtTips("开始测试");
-
             try
             {
                 // 执行测试逻辑
                 await Task.Delay(1000, cancellationToken);
-                //Delay(90, 100, cancellationToken, 
-                //    () => OPCHelper.TestCongrp[123].ToString() == "10");
                 return true;
+            }
+            catch (Exception ex)
+            {
+                NlogHelper.Default.Error($"ExperimentalTest01：{ex.Message}");
+                throw new($"ExperimentalTest01：{ex.Message}");
             }
             finally
             {
-                TestStatus(false);
+                // 试验结束后的清理操作
             }
         }
     }

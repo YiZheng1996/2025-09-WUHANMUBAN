@@ -1,14 +1,9 @@
-﻿using AntdUI;
-using RW.UI.Controls.Report;
-using System.Drawing.Printing;
-using Vanara.PInvoke;
-
-namespace MainUI
+﻿namespace MainUI
 {
     public partial class frmDispReport : UIForm
     {
         private string filename;
-        private RW.Report rWReport;
+        private RW.UI.Controls.Report.RWReport rWReport;
         public frmDispReport(string file)
         {
             InitializeComponent();

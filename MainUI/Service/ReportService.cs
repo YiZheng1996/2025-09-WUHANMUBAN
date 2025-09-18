@@ -3,7 +3,7 @@ namespace MainUI.Service
     /// <summary>
     /// 报表服务类 - 包含加载、保存和翻页功能
     /// </summary>
-    public class ReportService(string reportsPath, RW.Report report = null)
+    public class ReportService(string reportsPath, RW.UI.Controls.Report.RWReport report = null)
     {
         // 当前行数
         public int CurrentRows { get; private set; } = 1;

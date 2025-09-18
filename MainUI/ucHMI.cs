@@ -1,7 +1,5 @@
 ﻿using AntdUI;
 using MainUI.Service;
-using RW.UI.Controls.Report;
-using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
 
 namespace MainUI
@@ -9,7 +7,7 @@ namespace MainUI
     public partial class UcHMI : UserControl
     {
         #region 全局变量
-        private readonly RW.Report rWReport = new();
+        private readonly RW.UI.Controls.Report.RWReport rWReport = new();
         private readonly frmMainMenu frm = new();
         Dictionary<TaskInfo, BaseTest> DicTestItems = [];
         public delegate void RunStatusHandler(bool obj);

@@ -78,8 +78,8 @@ namespace MainUI.Procedure.Test
             set => _paraconfig = value;
         }
 
-        private static RW.Report _report;
-        public static RW.Report Report
+        private static RW.UI.Controls.Report.RWReport _report;
+        public static RW.UI.Controls.Report.RWReport Report
         {
             get => _report;
             set => _report = value;

@@ -24,21 +24,25 @@ namespace MainUI.Model
         /// <summary>
         /// 车型车号编号
         /// </summary>
+        [Column(StringLength = 200)]
         public string TestID { get; set; }
 
         /// <summary>
         /// 操作员
         /// </summary>
+        [Column(StringLength = 100)]
         public string Tester { get; set; }
 
         /// <summary>
         /// 保存时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime TestTime { get; set; }
 
         /// <summary>
         /// 保存报告路径
         /// </summary>
+        [Column(StringLength = 500)]
         public string ReportPath { get; set; }
     }
 
@@ -47,11 +51,13 @@ namespace MainUI.Model
         /// <summary>
         /// 类型名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ModelTypeName { get; set; }
 
         /// <summary>
         /// 型号名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ModelName { get; set; }
     }
 }

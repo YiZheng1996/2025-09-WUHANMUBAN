@@ -10,6 +10,7 @@ namespace MainUI.Model
 
         public int Step { get; set; }
 
+        [Column(StringLength = 100)]
         public string ProcessName { get; set; }
 
         public int ModelID { get; set; }
@@ -19,7 +20,10 @@ namespace MainUI.Model
 
     public class TestStepNewModel : TestStepModel
     {
+        [Column(StringLength = 100)]
         public string TestProcessName { get; set; }
+
+        [Column(MapType = typeof(bool))]
         public bool IsVisible { get; set; }
     }
 }

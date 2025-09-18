@@ -18,16 +18,19 @@ namespace MainUI.Model
         /// <summary>
         /// 流程项点名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ProcessName { get; set; }
 
         /// <summary>
         /// 实体类名称，用于反射创建实例
         /// </summary>
+        [Column(StringLength = 100)]
         public string EntityClassName { get; set; }
 
         /// <summary>
         /// 是否在测试中可见
         /// </summary>
+        [Column(MapType = typeof(bool))]
         public bool IsVisible { get; set; }
 
         private bool _enable;

@@ -96,6 +96,7 @@ namespace MainUI.Model
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
     }
 
@@ -141,6 +142,7 @@ namespace MainUI.Model
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
     }
 
@@ -176,6 +178,7 @@ namespace MainUI.Model
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
     }
 }

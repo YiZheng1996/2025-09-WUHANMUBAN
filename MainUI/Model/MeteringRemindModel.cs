@@ -1,7 +1,6 @@
 ﻿using AntdUI;
 using FreeSql.DataAnnotations;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace MainUI.Model
 {
@@ -17,28 +16,33 @@ namespace MainUI.Model
         /// <summary>
         /// 检查类型
         /// </summary>
+        [Column(StringLength = 100)]
         public string InspectType { get; set; }
 
         /// <summary>
         /// 检查名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string InspectName { get; set; }
 
         /// <summary>
         /// 当前检查时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime CurrentTime { get; set; }
         public string CurrenDate => CurrentTime.ToString("yyyy-MM-dd");
 
         /// <summary>
         /// 下次检查时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime NextTime { get; set; }
         public string NextDate => NextTime.ToString("yyyy-MM-dd");
 
         /// <summary>
         /// 检查说明
         /// </summary>
+        [Column(StringLength = 500)]
         public string InspectDescribe { get; set; }
 
         /// <summary>
@@ -50,11 +54,13 @@ namespace MainUI.Model
         /// 是否删除
         /// </summary>
         [DefaultValue(0)]
+        [Column(MapType = typeof(bool))]
         public int IsDelete { get; set; }
 
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
 
         CellLink[] _Buttns =

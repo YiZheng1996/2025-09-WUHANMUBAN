@@ -42,6 +42,9 @@
     <None Remove="CurrencyHelper\Permission\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Model\TestStep.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="BLL\ModelBLL.cs~RF111b3053.TMP" />
     <None Remove="frmDeviceInspect.Designer.cs~RF5b80c14.TMP" />
     <None Remove="Procedure\Controls\UcSwitch.resx~RF68be5d8.TMP" />
@@ -131,10 +134,10 @@
       <PrivateAssets>all</PrivateAssets>
       <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
     </PackageReference>
-    <PackageReference Include="FreeSql" Version="3.5.212" />
-    <PackageReference Include="FreeSql.Provider.Sqlite" Version="3.5.212" />
+    <PackageReference Include="FreeSql" Version="3.5.213" />
+    <PackageReference Include="FreeSql.Provider.MySql" Version="3.5.213" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
+    <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="6.0.3" />
     <PackageReference Include="NLog.Database" Version="5.3.4" />

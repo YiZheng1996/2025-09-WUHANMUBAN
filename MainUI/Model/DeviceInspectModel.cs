@@ -16,11 +16,13 @@ namespace MainUI.Model
         /// <summary>
         /// 部件类型
         /// </summary>
+        [Column(StringLength = 100)]
         public string PartType { get; set; }
 
         /// <summary>
         /// 部件名称
         /// </summary>
+        [Column(StringLength = 200)]
         public string PartName { get; set; }
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace MainUI.Model
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
 
         CellLink[] _Buttns =

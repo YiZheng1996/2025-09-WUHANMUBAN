@@ -40,13 +40,14 @@ namespace MainUI
         private static void InitializeDatabase()
         {
             VarHelper.fsql = new FreeSql.FreeSqlBuilder()
-                //.UseMonitorCommand(cmd => Trace.WriteLine($"Sql：{cmd.CommandText}"))
-                .UseConnectionString(FreeSql.DataType.Sqlite,
+                .UseMonitorCommand(cmd => Trace.WriteLine($"Sql：{cmd.CommandText}"))
+                .UseConnectionString(FreeSql.DataType.MySql,
                     ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString)
+                .UseAutoSyncStructure(true) // 自动同步表结构
                 .Build();
 
             if (!VarHelper.fsql.Ado.ExecuteConnectTest())
-                throw new Exception("Sqlite数据库连接失败");
+                throw new Exception("MySQL数据库连接失败");
         }
 
         private static Mutex applicationMutex;

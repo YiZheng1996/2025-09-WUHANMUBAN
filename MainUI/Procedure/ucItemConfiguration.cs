@@ -42,7 +42,7 @@
             try
             {
                 lstTestPoint.Items.Clear();
-                List<TestStepModel> lstTestStep = StepBLL.GetTestSteps(new TestStep { ModelID = (int)cboModel?.SelectedValue });
+                List<TestStepModel> lstTestStep = StepBLL.GetTestSteps(new TestStepModel { ModelID = (int)cboModel?.SelectedValue });
                 foreach (TestStepModel step in lstTestStep)
                 {
                     foreach (var p in lstTestProcess)

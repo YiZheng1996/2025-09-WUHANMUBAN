@@ -16,11 +16,13 @@ namespace MainUI.Model
         /// <summary>
         /// 类型名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ModelTypeName { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [Column(StringLength = 500)]
         public string Mark { get; set; }
 
         /// <summary>
@@ -50,11 +52,13 @@ namespace MainUI.Model
         /// <summary>
         /// 型号名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ModelName { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [Column(StringLength = 500)]
         public string Mark { get; set; }
 
         /// <summary>
@@ -65,27 +69,32 @@ namespace MainUI.Model
         /// <summary>
         /// 创建时间
         /// </summary>
+        [Column(StringLength = 100)]
         public string CreateTime { get; set; }
 
         /// <summary>
         /// 修改时间
         /// </summary>
+        [Column(StringLength = 200)]
         public string UpdateTime { get; set; }
 
         /// <summary>
         /// 是否已删除
         /// </summary>
+        [Column(MapType = typeof(bool))]
         public bool IsDeleted { get; set; }
 
         /// <summary>
         /// 图号
         /// </summary>
+        [Column(StringLength = 200)]
         public string DrawingNo { get; set; }
 
         /// <summary>
         /// 是否是发布
         /// </summary>
         [DefaultValue(0)]
+        [Column(MapType = typeof(bool))]
         public bool IsRelease { get; set; }
 
         /// <summary>
@@ -123,6 +132,7 @@ namespace MainUI.Model
         /// <summary>
         /// 类型名称
         /// </summary>
+        [Column(StringLength = 100)]
         public string ModelTypeName { get; set; }
     }
 }

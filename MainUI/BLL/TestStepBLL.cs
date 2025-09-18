@@ -4,7 +4,7 @@ namespace MainUI.BLL
 {
     public class TestStepBLL
     {
-        public List<TestStepModel> GetTestSteps(TestStep Step) =>
+        public List<TestStepModel> GetTestSteps(TestStepModel Step) =>
             VarHelper.fsql.Select<TestStepModel>()
             .Where(x => x.ModelID == Step.ModelID)
             .ToList();

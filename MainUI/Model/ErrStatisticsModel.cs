@@ -17,16 +17,19 @@ namespace MainUI.Model
         /// <summary>
         /// 问题类型
         /// </summary>
+        [Column(StringLength = 100)]
         public string ErrType { get; set; }
 
         /// <summary>
         /// 问题详细内容
         /// </summary>
+        [Column(StringLength = 500)]
         public string ErrContent { get; set; }
 
         /// <summary>
         /// 问题记录时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime ErrTime { get; set; }
         public string ErrDate => ErrTime.ToString("yyyy-MM-dd");
 
@@ -34,11 +37,13 @@ namespace MainUI.Model
         /// 是否删除
         /// </summary>
         [DefaultValue(0)]
+        [Column(MapType = typeof(bool))]
         public int IsDelete { get; set; }
 
         /// <summary>
         /// 删除时间
         /// </summary>
+        [Column(ServerTime = DateTimeKind.Local)]
         public DateTime DeleteTime { get; set; }
     }
 }
